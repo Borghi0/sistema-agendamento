@@ -9,8 +9,8 @@ public class Palestra{
   private LocalDate data;
   private LocalTime hora;
 
-  private List<Pessoa> palestrante; // criar classe pessoa
-  private List<Pessoa> participante; // criar classe pessoa
+  private List<Palestrante> palestrante; // criar classe Palestrante - tipo de Pessoa
+  private List<Participante> participante; // criar classe Participante - tipo de Pessoa
 
   // getters e setter
 
