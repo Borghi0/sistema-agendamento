@@ -5,7 +5,7 @@ public class Pessoa{
   // atributos
   private String nome;
   
-  private List<Palestra> palestras
+  private List<Palestra> palestras;
 
   
 
