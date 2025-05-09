@@ -28,3 +28,4 @@ replay_pid*
 # meu projeto
 /build.xml
 /nbproject/
+/build/

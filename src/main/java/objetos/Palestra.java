@@ -1,4 +1,6 @@
 // src/main/java/objetos/Palestra.java
+package main.java.objetos;
+
 import java.time.LocalTime;
 import java.time.LocalDate;
 import java.util.List;
@@ -9,11 +11,13 @@ public class Palestra{
   private String local; // criar uma classe endereço se possível
   private LocalDate data;
   private LocalTime hora;
+  private int vagas;
 
-  //private List<Palestrante> palestrante; // criar classe Palestrante - tipo de Pessoa
-  //private List<Participante> participante; // criar classe Participante - tipo de Pessoa
+  private List<Palestrante> palestrantes;
+  private List<Usuario> inscritos;
 
-  // getters e setter
+  
+  // getters e setters
 
   
 }

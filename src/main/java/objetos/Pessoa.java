@@ -1,16 +1,19 @@
 // src/main/java/objetos/Pessoa.java
+package main.java.objetos;
+
 import java.util.List;
 
-public class Pessoa{
+public abstract class Pessoa{
   // atributos
   private String nome;
+  private String cpf;
   
   private List<Palestra> palestras;
 
   
 
   
-  // getters e setter
+  // getters e setters
 
   
 }
