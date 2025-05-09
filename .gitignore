@@ -25,7 +25,8 @@ replay_pid*
 /projeto/target/
 /mavenproject1/target/
 
-# meu projeto
+# projeto local
 /build.xml
 /nbproject/
 /build/
+/local/
