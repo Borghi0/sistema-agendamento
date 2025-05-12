@@ -5,14 +5,15 @@ import java.util.Scanner;
 
 import main.java.objetos.*; // importa todas as classes de objetos/
 
+
 public class Main{
     public static void main(String args[]){
         Scanner scan = new Scanner(System.in);
-        Usuario admin = new Usuario();
+        Usuario admin = new Usuario("admin@", "admin", "admin", true);
         
-    // Criar admin hardcode
     
-    // Fazer menu de opção: "Entrar" e "Cadastrar-se"
+        // Fazer menu de opção: "Entrar" e "Cadastrar-se"
     
+        
   }
 }
