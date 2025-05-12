@@ -5,6 +5,7 @@ public class Usuario extends Pessoa{
     // atributos
     private String email;
     private String senha;
+    private String user;
     private boolean adm_flag;
     
     
