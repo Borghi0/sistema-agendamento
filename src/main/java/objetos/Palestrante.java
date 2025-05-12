@@ -4,8 +4,23 @@ package main.java.objetos;
 public class Palestrante extends Pessoa{
     // atributos
     private String formacao;
+ 
     
+    //construtor
+    public Palestrante(){
+        this.formacao = "";
+    }
+    public Palestrante(String formacao){
+        this.formacao = formacao;
+    }
+
+    // getters
+    public String getFormacao(){
+        return formacao;
+    }
     
-    
-    // getters e setters
+    //setters
+    public void setFormacao(String formacao){
+        this.formacao = formacao;
+    }
 }
