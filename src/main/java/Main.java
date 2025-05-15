@@ -9,7 +9,7 @@ import main.java.objetos.*; // importa todas as classes de objetos/
 public class Main{
     public static void main(String args[]){
         Scanner scan = new Scanner(System.in);
-        Usuario admin = new Usuario("admin@", "admin", "admin", true);
+        Usuario admin = new Usuario("admin@", "admin", "admin", true, false);
         
     
         // Fazer menu de opção: "Entrar" e "Cadastrar-se"
