@@ -1,12 +1,12 @@
-# Sistema de Agendamento de Palestras - Evento Bons Fluidos 🎤
+# Sistema de Agendamento de Palestras - Evento Bons Fluidos
 
 Este é um sistema desktop desenvolvido em Java com o objetivo de facilitar o **agendamento de palestras** e o **gerenciamento de voluntários(as)** no evento Bons Fluidos. O sistema é parte do projeto da disciplina **Certificadora da Competência 1** do curso de Engenharia da Computação - UTFPR.
 
-## 📌 Objetivo
+## Objetivo
 
 Fornecer uma solução digital robusta, acessível e eficiente para os organizadores do evento, centralizando informações e otimizando a logística do evento.
 
-## 🎯 Funcionalidades
+## Funcionalidades
 
 ### Administrador:
 - Cadastro e gerenciamento de palestras
@@ -22,7 +22,7 @@ Fornecer uma solução digital robusta, acessível e eficiente para os organizad
 - Autenticação com dois níveis de acesso (Administrador e Organizador)
 - Interface gráfica intuitiva e amigável
 
-## 🛠 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **Linguagem:** Java
 - **Paradigma:** Programação Orientada a Objetos
@@ -33,7 +33,7 @@ Fornecer uma solução digital robusta, acessível e eficiente para os organizad
 - **Outras ferramentas:** Canva (design), Draw.io (diagramas), Google Docs (documentação)
 
 
-## 👥 Equipe de Desenvolvimento
+## Equipe de Desenvolvimento
 
 - **Arthur Henrique Caron**  
 
@@ -43,7 +43,7 @@ Fornecer uma solução digital robusta, acessível e eficiente para os organizad
 
 - **Melina Alves Gonçalves**
 
-## 📅 Cronograma de Desenvolvimento
+## Cronograma de Desenvolvimento
 
 | Semana | Atividades |
 |--------|------------|
@@ -54,10 +54,10 @@ Fornecer uma solução digital robusta, acessível e eficiente para os organizad
 | 5 | Relatórios, certificados e banco de dados |
 | 6 | Testes finais, revisão e entrega |
 
-## 📎 Repositório
+## Repositório
 
 Acesse o repositório completo no GitHub:  
-🔗 [https://github.com/Borghi0/sistema-agendamento](https://github.com/Borghi0/sistema-agendamento)
+[https://github.com/Borghi0/sistema-agendamento](https://github.com/Borghi0/sistema-agendamento)
 
 ---
 
