@@ -18,7 +18,8 @@ public class Usuario extends Pessoa{
         this.adm_flag = false;
         this.colab_flag = false;
     }
-    public Usuario(String email, String senha, String user, boolean adm_flag, boolean colab_flag){
+    public Usuario(String nome, String cpf, String email, String senha, String user, boolean adm_flag, boolean colab_flag){
+        super(nome, cpf);
         this.email = email;
         this.senha = senha;
         this.user = user;
