@@ -10,7 +10,8 @@ public class Palestrante extends Pessoa{
     public Palestrante(){
         this.formacao = "";
     }
-    public Palestrante(String formacao){
+    public Palestrante(String nome, String cpf, String formacao){
+        super(nome, cpf);
         this.formacao = formacao;
     }
 

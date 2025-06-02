@@ -9,7 +9,7 @@ import main.java.visao .*;   // importa todas as classes de visao/
 public class Main{
     public static void main(String args[]){
         Leitura ler = Leitura.geraLeitura();
-        Usuario admin = new Usuario("admin@", "admin", "admin", true, false);
+        UsuarioControle.cadastrar("administrador", "0", "admin@", "adminSenha", "admin", true, false);
         
         int o; // opção escolhida no menu
     
@@ -22,11 +22,13 @@ public class Main{
             
             switch (o){
                 case 1:
-                    MenuEntrar.main();
+                    
+                    MenuInicial.menuEntrar(ler);
                     break;
                     
                 case 2:
                     
+                    MenuInicial.menuCadastrar(ler);
                     break;
                     
                 case 0:
