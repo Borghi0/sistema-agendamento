@@ -7,38 +7,12 @@ import main.java.visao .*;   // importa todas as classes de visao/
 
 
 public class Main{
+    
     public static void main(String args[]){
         Leitura ler = Leitura.geraLeitura();
         UsuarioControle.cadastrar("administrador", "0", "admin@", "adminSenha", "admin", true, false);
         
-        int o; // opção escolhida no menu
-    
-        // Fazer menu de opção: "Entrar" e "Cadastrar-se"
-        do{
-            System.out.println("\n1 - Entrar");
-            System.out.println("2 - Cadastrar-se");
-            System.out.println("0 - Sair");
-            o = Integer.parseInt(ler.entDados("Escolha uma opção: "));
-            
-            switch (o){
-                case 1:
-                    
-                    MenuInicial.menuEntrar(ler);
-                    break;
-                    
-                case 2:
-                    
-                    MenuInicial.menuCadastrar(ler);
-                    break;
-                    
-                case 0:
-                    System.out.println("Saindo...");
-                    break;
-                default:
-                    System.out.println("Opção inválida");
-                    break;
-            }
-        }while(o!=0);
         
+        MenuControle.menuInicial.setVisible(true);
   }
 }
