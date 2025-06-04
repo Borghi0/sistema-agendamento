@@ -94,7 +94,7 @@ public class JInicial extends javax.swing.JFrame {
         });
 
         rtErro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rtErro.setForeground(new java.awt.Color(255, 0, 51));
+        rtErro.setForeground(new java.awt.Color(204, 0, 0));
         rtErro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         rtErro.setText("usuário ou senha incorretos");
 
@@ -109,6 +109,11 @@ public class JInicial extends javax.swing.JFrame {
         mnOpcoes.add(mniCad);
 
         mniSair.setText("Fechar aplicação");
+        mniSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniSairActionPerformed(evt);
+            }
+        });
         mnOpcoes.add(mniSair);
 
         mnBar.add(mnOpcoes);
@@ -188,6 +193,10 @@ public class JInicial extends javax.swing.JFrame {
         placeholder(true);
     }//GEN-LAST:event_cxUserFocusLost
 
+    private void mniSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_mniSairActionPerformed
+
     public void entrar(){
         if(MenuControle.entrar(cxUser.getText(), csSenha.getPassword())){
             dispose();
@@ -205,7 +214,7 @@ public class JInicial extends javax.swing.JFrame {
     }
     
     public void placeholder(boolean add){
-        if(cxUser.getText().equals("") && add){
+        if(cxUser.getText().isBlank() && add){
             cxUser.setText("user/email");
             cxUser.setForeground(java.awt.Color.gray);
         }
