@@ -7,7 +7,7 @@ import main.java.controle.*;
  *
  * @author joaop
  */
-public class JInicial extends javax.swing.JFrame {
+public final class JInicial extends javax.swing.JFrame {
 
     /**
      * Creates new form JInicial
@@ -64,6 +64,11 @@ public class JInicial extends javax.swing.JFrame {
                 cxUserActionPerformed(evt);
             }
         });
+        cxUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cxUserKeyPressed(evt);
+            }
+        });
 
         rtSenha.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         rtSenha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -76,12 +81,22 @@ public class JInicial extends javax.swing.JFrame {
                 csSenhaActionPerformed(evt);
             }
         });
+        csSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                csSenhaKeyPressed(evt);
+            }
+        });
 
         btCad.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         btCad.setText("Cadastrar-se");
         btCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCadActionPerformed(evt);
+            }
+        });
+        btCad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btCadKeyPressed(evt);
             }
         });
 
@@ -92,9 +107,14 @@ public class JInicial extends javax.swing.JFrame {
                 btEntActionPerformed(evt);
             }
         });
+        btEnt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btEntKeyPressed(evt);
+            }
+        });
 
         rtErro.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rtErro.setForeground(new java.awt.Color(204, 0, 0));
+        rtErro.setForeground(new java.awt.Color(255, 0, 0));
         rtErro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         rtErro.setText("usuário ou senha incorretos");
 
@@ -197,6 +217,22 @@ public class JInicial extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_mniSairActionPerformed
 
+    private void cxUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxUserKeyPressed
+        entrar(evt);
+    }//GEN-LAST:event_cxUserKeyPressed
+
+    private void csSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_csSenhaKeyPressed
+        entrar(evt);
+    }//GEN-LAST:event_csSenhaKeyPressed
+
+    private void btEntKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btEntKeyPressed
+        entrar(evt);
+    }//GEN-LAST:event_btEntKeyPressed
+
+    private void btCadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btCadKeyPressed
+        jCad();
+    }//GEN-LAST:event_btCadKeyPressed
+
     public void entrar(){
         if(MenuControle.entrar(cxUser.getText(), csSenha.getPassword())){
             dispose();
@@ -206,11 +242,17 @@ public class JInicial extends javax.swing.JFrame {
             rtErro.setVisible(true);
         }
     }
+    public void entrar(java.awt.event.KeyEvent evt){
+        if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER) entrar();
+    }
     
     public void jCad(){
         MenuControle.menuCadastro.setVisible(true);
         setVisible(false);
         rtErro.setVisible(false);
+    }
+    public void jCad(java.awt.event.KeyEvent evt){
+        if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER) jCad();
     }
     
     public void placeholder(boolean add){
@@ -223,6 +265,7 @@ public class JInicial extends javax.swing.JFrame {
             cxUser.setForeground(java.awt.Color.black);
         }
     }
+    
     
     /**
      * @param args the command line arguments

@@ -217,7 +217,7 @@ public class JCadastro extends javax.swing.JFrame {
         rtErroEmail.setMinimumSize(new java.awt.Dimension(120, 0));
 
         rtCadInfo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rtCadInfo.setForeground(new java.awt.Color(204, 0, 0));
+        rtCadInfo.setForeground(new java.awt.Color(255, 0, 0));
         rtCadInfo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         rtCadInfo.setText("Preencha todos os campos");
 
@@ -340,31 +340,31 @@ public class JCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_cxUserActionPerformed
 
     private void btComfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btComfKeyPressed
-        enter(evt);
+        cadTenta(evt);
     }//GEN-LAST:event_btComfKeyPressed
 
     private void cxUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxUserKeyPressed
-        enter(evt);
+        cadTenta(evt);
     }//GEN-LAST:event_cxUserKeyPressed
 
     private void cxEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxEmailKeyPressed
-        enter(evt);
+        cadTenta(evt);
     }//GEN-LAST:event_cxEmailKeyPressed
 
     private void cxNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxNomeKeyPressed
-        enter(evt);
+        cadTenta(evt);
     }//GEN-LAST:event_cxNomeKeyPressed
 
     private void cxCPFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxCPFKeyPressed
-        enter(evt);
+        cadTenta(evt);
     }//GEN-LAST:event_cxCPFKeyPressed
 
     private void csSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_csSenhaKeyPressed
-        enter(evt);
+        cadTenta(evt);
     }//GEN-LAST:event_csSenhaKeyPressed
 
     private void csCSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_csCSenhaKeyPressed
-        enter(evt);
+        cadTenta(evt);
     }//GEN-LAST:event_csCSenhaKeyPressed
 
     private void btVoltarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btVoltarKeyPressed
@@ -411,6 +411,9 @@ public class JCadastro extends javax.swing.JFrame {
             }
         }
     }
+    public void cadTenta(java.awt.event.KeyEvent evt){
+        if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER) cadTenta();
+    }
     private void cadastrar(){
         rtCadInfo.setVisible(false);
         int erro = MenuControle.cad(cxNome.getText(), cxCPF.getText(), cxEmail.getText(),
@@ -418,7 +421,7 @@ public class JCadastro extends javax.swing.JFrame {
         switch (erro) {
             case 0 -> {
                 rtCadInfo.setForeground(Color.black);
-                rtCadInfo.setText("Cadastrado com sucesso");
+                rtCadInfo.setText("Cadastrado com sucesso!");
                 rtCadInfo.setVisible(true);
                 cxUser.setText("");
                 cxEmail.setText("");
@@ -426,6 +429,7 @@ public class JCadastro extends javax.swing.JFrame {
                 cxCPF.setText("");
                 csSenha.setText("");
                 csCSenha.setText("");
+                cxUser.requestFocus();
             }
             case 1 -> {
                 rtErroEmail.setText("Email já cadastrado");
@@ -455,11 +459,6 @@ public class JCadastro extends javax.swing.JFrame {
             rtCadInfo.setVisible(true);
         }
     }
-    
-    public void enter(java.awt.event.KeyEvent evt){
-        if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER) cadTenta();
-    }
-    
     
     
     /**
