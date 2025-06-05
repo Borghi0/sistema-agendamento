@@ -28,4 +28,12 @@ public class MenuControle {
             return true;
         }
     }
+    
+    public static int cad(String nome, String cpf, String email, char[] senha, String user, boolean adm_flag, boolean colab_flag){
+        int correspondencia = UsuarioControle.buscar(email, user);
+        if(correspondencia==0){
+            UsuarioControle.cadastrar(nome, cpf, email, String.valueOf(senha), user, adm_flag, colab_flag);
+        }
+        return correspondencia;
+    }
 }

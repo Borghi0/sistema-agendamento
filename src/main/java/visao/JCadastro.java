@@ -1,9 +1,12 @@
 // src/main/java/visao/JCadastro.java
 package main.java.visao;
 
+import java.awt.Color;
+import java.util.Arrays;
 import main.java.controle.*;
 import javax.swing.JOptionPane;
-
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class JCadastro extends javax.swing.JFrame {
     static JCadastro cadUnic;
@@ -12,8 +15,41 @@ public class JCadastro extends javax.swing.JFrame {
      */
     public JCadastro() {
         initComponents();
+        rtCadInfo.setVisible(false);
         setLocationRelativeTo(null); // Inicia a janela centralizada
         //setExtendedState(MAXIMIZED_BOTH); // Inicia a janela maximizada
+        cxEmail.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                rtErroEmail.setText("");
+                cxEmail.setForeground(Color.black);
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                rtErroEmail.setText("");
+                cxEmail.setForeground(Color.black);
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+        });
+        cxUser.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                rtErroUser.setText("");
+                cxUser.setForeground(Color.black);
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                rtErroUser.setText("");
+                cxUser.setForeground(Color.black);
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+        });
     }
 
     public static JCadastro getMenuCadastro(){
@@ -41,8 +77,11 @@ public class JCadastro extends javax.swing.JFrame {
         rtUser = new javax.swing.JLabel();
         cxUser = new javax.swing.JTextField();
         rtNome = new javax.swing.JLabel();
+        btVoltar = new javax.swing.JButton();
         btComf = new javax.swing.JButton();
-        btComf1 = new javax.swing.JButton();
+        rtErroUser = new javax.swing.JLabel();
+        rtErroEmail = new javax.swing.JLabel();
+        rtCadInfo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro");
@@ -51,6 +90,11 @@ public class JCadastro extends javax.swing.JFrame {
         cxNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cxNomeActionPerformed(evt);
+            }
+        });
+        cxNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cxNomeKeyPressed(evt);
             }
         });
 
@@ -62,6 +106,11 @@ public class JCadastro extends javax.swing.JFrame {
         cxCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cxCPFActionPerformed(evt);
+            }
+        });
+        cxCPF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cxCPFKeyPressed(evt);
             }
         });
 
@@ -79,11 +128,21 @@ public class JCadastro extends javax.swing.JFrame {
                 csSenhaActionPerformed(evt);
             }
         });
+        csSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                csSenhaKeyPressed(evt);
+            }
+        });
 
         csCSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         csCSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 csCSenhaActionPerformed(evt);
+            }
+        });
+        csCSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                csCSenhaKeyPressed(evt);
             }
         });
 
@@ -97,6 +156,11 @@ public class JCadastro extends javax.swing.JFrame {
                 cxEmailActionPerformed(evt);
             }
         });
+        cxEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cxEmailKeyPressed(evt);
+            }
+        });
 
         rtUser.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         rtUser.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -108,62 +172,99 @@ public class JCadastro extends javax.swing.JFrame {
                 cxUserActionPerformed(evt);
             }
         });
+        cxUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cxUserKeyPressed(evt);
+            }
+        });
 
         rtNome.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         rtNome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         rtNome.setText("Nome:");
 
+        btVoltar.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btVoltar.setText("Voltar");
+        btVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVoltarActionPerformed(evt);
+            }
+        });
+        btVoltar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btVoltarKeyPressed(evt);
+            }
+        });
+
         btComf.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        btComf.setText("Voltar");
+        btComf.setText("Comfirmar");
         btComf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btComfActionPerformed(evt);
             }
         });
-
-        btComf1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        btComf1.setText("Comfirmar");
-        btComf1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btComf1ActionPerformed(evt);
+        btComf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btComfKeyPressed(evt);
             }
         });
+
+        rtErroUser.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rtErroUser.setForeground(new java.awt.Color(255, 0, 0));
+        rtErroUser.setMinimumSize(new java.awt.Dimension(120, 0));
+
+        rtErroEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rtErroEmail.setForeground(new java.awt.Color(255, 0, 0));
+        rtErroEmail.setMinimumSize(new java.awt.Dimension(120, 0));
+
+        rtCadInfo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rtCadInfo.setForeground(new java.awt.Color(255, 0, 0));
+        rtCadInfo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        rtCadInfo.setText("Preencha todos os campos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(225, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(rtUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rtNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cxCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                            .addComponent(cxNome)
-                            .addComponent(cxEmail)
-                            .addComponent(cxUser)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(rtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rtCSenha))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(csSenha)
-                            .addComponent(csCSenha)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 173, Short.MAX_VALUE)
-                                .addComponent(btComf1)))))
-                .addContainerGap(226, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btComf)
+                .addComponent(btVoltar)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(163, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(rtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(rtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(rtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(rtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cxEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cxNome, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cxUser)
+                                    .addComponent(cxCPF)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(rtCSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                                    .addComponent(rtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 146, Short.MAX_VALUE)
+                                        .addComponent(btComf))
+                                    .addComponent(csSenha)
+                                    .addComponent(csCSenha)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rtCadInfo)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(rtErroEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(rtErroUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,11 +272,13 @@ public class JCadastro extends javax.swing.JFrame {
                 .addContainerGap(86, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cxUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cxUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rtErroUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cxEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cxEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rtErroEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,16 +295,18 @@ public class JCadastro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rtCSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(csCSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btComf1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rtCadInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
                 .addComponent(btComf, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void cxNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cxNomeActionPerformed
@@ -219,25 +324,142 @@ public class JCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_csCSenhaActionPerformed
 
     private void cxEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxEmailActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_cxEmailActionPerformed
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        voltar();
+    }//GEN-LAST:event_btVoltarActionPerformed
+
+    private void btComfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComfActionPerformed
+        cadTenta();        
+    }//GEN-LAST:event_btComfActionPerformed
 
     private void cxUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cxUserActionPerformed
 
-    private void btComfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComfActionPerformed
-        voltar();
-    }//GEN-LAST:event_btComfActionPerformed
+    private void btComfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btComfKeyPressed
+        cadTenta(evt);
+    }//GEN-LAST:event_btComfKeyPressed
 
-    private void btComf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComf1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btComf1ActionPerformed
+    private void cxUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxUserKeyPressed
+        cadTenta(evt);
+    }//GEN-LAST:event_cxUserKeyPressed
+
+    private void cxEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxEmailKeyPressed
+        cadTenta(evt);
+    }//GEN-LAST:event_cxEmailKeyPressed
+
+    private void cxNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxNomeKeyPressed
+        cadTenta(evt);
+    }//GEN-LAST:event_cxNomeKeyPressed
+
+    private void cxCPFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxCPFKeyPressed
+        cadTenta(evt);
+    }//GEN-LAST:event_cxCPFKeyPressed
+
+    private void csSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_csSenhaKeyPressed
+        cadTenta(evt);
+    }//GEN-LAST:event_csSenhaKeyPressed
+
+    private void csCSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_csCSenhaKeyPressed
+        cadTenta(evt);
+    }//GEN-LAST:event_csCSenhaKeyPressed
+
+    private void btVoltarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btVoltarKeyPressed
+        voltar(evt);
+    }//GEN-LAST:event_btVoltarKeyPressed
 
     public void voltar(){
         dispose();
         MenuControle.menuInicial.setVisible(true);
     }
+    public void voltar(java.awt.event.KeyEvent evt){
+        if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+            dispose();
+            MenuControle.menuInicial.setVisible(true);   
+        }
+    }
+    
+    public void cadTenta(){
+        if(cxUser.getText().isBlank()){
+            msgErro(false);        
+        }
+        else if(cxEmail.getText().isBlank()){
+            msgErro(false);
+        }
+        else if(cxNome.getText().isBlank()){
+            msgErro(false);
+        }
+        else if(cxCPF.getText().isBlank()){
+            msgErro(false);
+        }
+        else if(String.valueOf(csSenha.getPassword()).isBlank()){
+            msgErro(false);
+        }
+        else if(String.valueOf(csCSenha.getPassword()).isBlank()){
+            msgErro(false);
+        }
+        else {
+            if(Arrays.equals(csSenha.getPassword(), csCSenha.getPassword())){
+                rtCadInfo.setVisible(false);
+                cadastrar();
+            }
+            else{
+                msgErro(true);
+            }
+        }
+    }
+    public void cadTenta(java.awt.event.KeyEvent evt){
+        if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER) cadTenta();
+    }
+    private void cadastrar(){
+        rtCadInfo.setVisible(false);
+        int erro = MenuControle.cad(cxNome.getText(), cxCPF.getText(), cxEmail.getText(),
+                        csSenha.getPassword(), cxUser.getText(), false, false);
+        switch (erro) {
+            case 0 -> {
+                rtCadInfo.setForeground(Color.black);
+                rtCadInfo.setText("Cadastrado com sucesso!");
+                rtCadInfo.setVisible(true);
+                cxUser.setText("");
+                cxEmail.setText("");
+                cxNome.setText("");
+                cxCPF.setText("");
+                csSenha.setText("");
+                csCSenha.setText("");
+                cxUser.requestFocus();
+            }
+            case 1 -> {
+                rtErroEmail.setText("Email já cadastrado");
+                cxEmail.setForeground(Color.red);
+            }
+            case 2 -> {
+                rtErroUser.setText("Nome em uso");
+                cxUser.setForeground(Color.red);
+            }
+            default -> {
+                rtErroEmail.setText("Email já cadastrado");
+                cxEmail.setForeground(Color.red);
+                rtErroUser.setText("Nome em uso");
+                cxUser.setForeground(Color.red);
+            }
+        }
+    }
+    
+    public void msgErro(boolean ErroSenha){
+        if(ErroSenha){
+            rtCadInfo.setForeground(Color.red);
+            rtCadInfo.setText("Senhas não correspondem");
+            rtCadInfo.setVisible(true);
+        } else{
+            rtCadInfo.setForeground(Color.red);
+            rtCadInfo.setText("Preencha todos os campos");
+            rtCadInfo.setVisible(true);
+        }
+    }
+    
     
     /**
      * @param args the command line arguments
@@ -276,7 +498,7 @@ public class JCadastro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btComf;
-    private javax.swing.JButton btComf1;
+    private javax.swing.JButton btVoltar;
     private javax.swing.JPasswordField csCSenha;
     private javax.swing.JPasswordField csSenha;
     private javax.swing.JTextField cxCPF;
@@ -285,7 +507,10 @@ public class JCadastro extends javax.swing.JFrame {
     private javax.swing.JTextField cxUser;
     private javax.swing.JLabel rtCPF;
     private javax.swing.JLabel rtCSenha;
+    private javax.swing.JLabel rtCadInfo;
     private javax.swing.JLabel rtEmail;
+    private javax.swing.JLabel rtErroEmail;
+    private javax.swing.JLabel rtErroUser;
     private javax.swing.JLabel rtNome;
     private javax.swing.JLabel rtSenha;
     private javax.swing.JLabel rtUser;
