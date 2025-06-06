@@ -34,7 +34,7 @@ public class UsuarioControle{
     public static int buscar(String email, String user){
         int correspondencia = 0;
         for(Usuario usuario : usuarios){
-            if(usuario.getUser().equals(email)){
+            if(usuario.getEmail().equals(email)){
                 correspondencia++;
                 break;
             }
