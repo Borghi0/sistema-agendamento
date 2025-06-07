@@ -12,10 +12,15 @@ public class MenuControle {
     //private static JUser menuUser = new JUser();
     
     public static boolean entrar(String userEmail, char[] senha){
-        Usuario usuario = UsuarioControle.entrar(userEmail, String.valueOf(senha));
+        Usuario usuario = null;
+        try{
+            usuario = UsuarioControle.entrar(userEmail, String.valueOf(senha));
+        }
+        catch(IllegalArgumentException iae){
+            return false;
+        }
         
-        if(usuario == null) return false;
-        else if(usuario.getAdm_flag()){
+        if(usuario.getAdm_flag()){
             menuAdmin.setVisible(true);
             return true;
         }
@@ -27,13 +32,5 @@ public class MenuControle {
             //menuUser.setVisible(true);
             return true;
         }
-    }
-    
-    public static int cad(String nome, String cpf, String email, char[] senha, String user, boolean adm_flag, boolean colab_flag){
-        int correspondencia = UsuarioControle.buscar(email, user);
-        if(correspondencia==0){
-            UsuarioControle.cadastrar(nome, cpf, email, String.valueOf(senha), user, adm_flag, colab_flag);
-        }
-        return correspondencia;
     }
 }

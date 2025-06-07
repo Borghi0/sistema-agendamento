@@ -29,7 +29,7 @@ public class UsuarioControle {
         return usuarios;
     }
     
-    public static void cadastrar(String nome, String cpf, String email, String senha, 
+    public static void cadastrar(String nome, String cpf, String email, String senha, String comfSenha,
                                String user, boolean adm_flag, boolean colab_flag) {
         // Validação de campos obrigatórios
         if (nome == null || nome.trim().isEmpty()) {
@@ -48,17 +48,24 @@ public class UsuarioControle {
             throw new IllegalArgumentException("Senha deve ter pelo menos 6 caracteres");
         }
         
+        if (!senha.equals(comfSenha)) {
+            throw new IllegalArgumentException("Senhas não correspondem");
+        }
+        
         if (!validarUsername(user)) {
             throw new IllegalArgumentException("Username deve ter entre 5 e 20 caracteres alfanuméricos");
         }
         
         // Verifica se usuário ou email já existem
         int existe = buscar(email, user);
-        if (existe == 1 || existe == 3) {
-            throw new IllegalArgumentException("Email já cadastrado");
+        if (existe == 1) {
+            throw new IllegalArgumentException("Email");
         }
-        if (existe == 2 || existe == 3) {
-            throw new IllegalArgumentException("Username já cadastrado");
+        if (existe == 2) {
+            throw new IllegalArgumentException("User");
+        }
+        if (existe == 3) {
+            throw new IllegalArgumentException("UserEmail");
         }
         
         usuarios.add(new Usuario(nome, cpf, email, senha, user, adm_flag, colab_flag));

@@ -10,7 +10,7 @@ public class Main{
     
     public static void main(String args[]){
         Leitura ler = Leitura.geraLeitura();
-        UsuarioControle.cadastrar("administrador", "0", "admin@", "adminSenha", "admin", true, false);
+        //UsuarioControle.cadastrar("administrador", "0", "admin@", "adminSenha", "admin", true, false);
         
         
         MenuControle.menuInicial.setVisible(true);
