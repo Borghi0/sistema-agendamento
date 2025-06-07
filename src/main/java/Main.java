@@ -12,7 +12,7 @@ public class Main{
         Leitura ler = Leitura.geraLeitura();
         UsuarioControle.cadastrar("administrador", "0", "admin@", "adminSenha", "admin", true, false);
         
-        
+        System.out.println("Testandoo");
         MenuControle.menuInicial.setVisible(true);
   }
 }
