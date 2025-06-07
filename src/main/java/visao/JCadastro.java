@@ -383,81 +383,64 @@ public class JCadastro extends javax.swing.JFrame {
     }
     
     public void cadTenta(){
-        if(cxUser.getText().isBlank()){
-            msgErro(false);        
+        boolean c = false;
+        try{
+            UsuarioControle.cadastrar(cxNome.getText(), cxCPF.getText(), cxEmail.getText(),
+                    String.valueOf(csSenha.getPassword()), String.valueOf(csCSenha.getPassword()), 
+                    cxUser.getText(), false, false);
         }
-        else if(cxEmail.getText().isBlank()){
-            msgErro(false);
+        catch(IllegalArgumentException iae){
+            c = true;
+            rtCadInfo.setForeground(Color.red);
+            rtCadInfo.setVisible(true);
+            rtCadInfo.setText(iae.getMessage());
+            if(iae.getMessage().equals("Email")) rtErro(1);
+            else if(iae.getMessage().equals("User")) rtErro(2);
+            else if(iae.getMessage().equals("UserEmail")) rtErro(3);
         }
-        else if(cxNome.getText().isBlank()){
-            msgErro(false);
-        }
-        else if(cxCPF.getText().isBlank()){
-            msgErro(false);
-        }
-        else if(String.valueOf(csSenha.getPassword()).isBlank()){
-            msgErro(false);
-        }
-        else if(String.valueOf(csCSenha.getPassword()).isBlank()){
-            msgErro(false);
-        }
-        else {
-            if(Arrays.equals(csSenha.getPassword(), csCSenha.getPassword())){
-                rtCadInfo.setVisible(false);
-                cadastrar();
-            }
-            else{
-                msgErro(true);
-            }
+        if(!c){
+            limpa();
+            rtCadInfo.setForeground(Color.black);
+            rtCadInfo.setText("Cadastrado com sucesso!");
+            rtCadInfo.setVisible(true);
         }
     }
     public void cadTenta(java.awt.event.KeyEvent evt){
         if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER) cadTenta();
     }
-    private void cadastrar(){
-        rtCadInfo.setVisible(false);
-        int erro = MenuControle.cad(cxNome.getText(), cxCPF.getText(), cxEmail.getText(),
-                        csSenha.getPassword(), cxUser.getText(), false, false);
+    public void limpa(){
+        cxUser.setText("");
+        cxEmail.setText("");
+        cxNome.setText("");
+        cxCPF.setText("");
+        csSenha.setText("");
+        csCSenha.setText("");
+        cxUser.requestFocus();
+    }
+    
+    public void rtErro(int erro){
         switch (erro) {
-            case 0 -> {
-                rtCadInfo.setForeground(Color.black);
-                rtCadInfo.setText("Cadastrado com sucesso!");
-                rtCadInfo.setVisible(true);
-                cxUser.setText("");
-                cxEmail.setText("");
-                cxNome.setText("");
-                cxCPF.setText("");
-                csSenha.setText("");
-                csCSenha.setText("");
-                cxUser.requestFocus();
-            }
             case 1 -> {
+                rtCadInfo.setVisible(false);
                 rtErroEmail.setText("Email já cadastrado");
                 cxEmail.setForeground(Color.red);
             }
             case 2 -> {
+                rtCadInfo.setVisible(false);
                 rtErroUser.setText("Nome em uso");
                 cxUser.setForeground(Color.red);
             }
-            default -> {
-                rtErroEmail.setText("Email já cadastrado");
-                cxEmail.setForeground(Color.red);
-                rtErroUser.setText("Nome em uso");
-                cxUser.setForeground(Color.red);
+            case 3 -> {
+                rtErro(1);
+                rtErro(2);
             }
         }
     }
     
-    public void msgErro(boolean ErroSenha){
-        if(ErroSenha){
-            rtCadInfo.setForeground(Color.red);
-            rtCadInfo.setText("Senhas não correspondem");
-            rtCadInfo.setVisible(true);
-        } else{
-            rtCadInfo.setForeground(Color.red);
-            rtCadInfo.setText("Preencha todos os campos");
-            rtCadInfo.setVisible(true);
-        }
+    public void msgErro(String msg){
+        rtCadInfo.setForeground(Color.red);
+        rtCadInfo.setText(msg);
+        rtCadInfo.setVisible(true);
     }
     
     
