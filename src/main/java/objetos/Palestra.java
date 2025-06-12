@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.time.LocalDate;
 import java.util.List;
 
+
 public class Palestra{
     // atributos
     private String titulo;

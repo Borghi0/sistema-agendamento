@@ -1,12 +1,9 @@
 // src/main/java/visao/JInicial.java
 package main.java.visao;
 
-
 import main.java.controle.*;
-/**
- *
- * @author joaop
- */
+
+
 public final class JInicial extends javax.swing.JFrame {
 
     /**

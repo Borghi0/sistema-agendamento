@@ -1,14 +1,10 @@
 // src/main/java/visao/JAdmin.java
 package main.java.visao;
 
-
 import java.awt.Dimension;// ADICIONEI ESTE IMPORT PARA RESOLVER O ERRO DO Dimension
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author joaop
- */
+
 public class JAdmin extends javax.swing.JFrame {
 
     /**
@@ -172,4 +168,4 @@ public class JAdmin extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel rtGen;
     // End of variables declaration//GEN-END:variables
-} 
+}
