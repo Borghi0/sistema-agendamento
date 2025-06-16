@@ -9,9 +9,8 @@ import main.java.visao .*;   // importa todas as classes de visao/
 public class Main{
     
     public static void main(String args[]){
-        Leitura ler = Leitura.geraLeitura();
-        UsuarioControle.cadastrar("administrador", "0", "admin@", "adminSenha", "admin", true, false);
-        
+        //Leitura ler = Leitura.geraLeitura();
+        UsuarioControle.getUsuarios().add(new Usuario("administrador", "0", "admin@", "adminSenha", "admin", true, false));
         
         MenuControle.menuInicial.setVisible(true);
   }
