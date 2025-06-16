@@ -1,10 +1,10 @@
-// src/main/java/visao/JAdmin.java
-package main.java.visao;
-
-/**
- *
- * @author joaop
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+package main.java.visao;
+import javax.swing.JOptionPane;
+
 public class JAdmin extends javax.swing.JFrame {
 
     /**
@@ -12,8 +12,6 @@ public class JAdmin extends javax.swing.JFrame {
      */
     public JAdmin() {
         initComponents();
-        setLocationRelativeTo(null); // Inicia a janela centralizada
-        setExtendedState(MAXIMIZED_BOTH); // Inicia a janela maximizada
     }
 
     /**
@@ -25,54 +23,110 @@ public class JAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        rtGen = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        rtGer = new javax.swing.JLabel();
+        btGerUser = new javax.swing.JButton();
+        btGerPl = new javax.swing.JButton();
+        btGerPll = new javax.swing.JButton();
+        btSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        rtGen.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        rtGen.setText("GERENCIAR");
+        rtGer.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        rtGer.setText("GERENCIAR");
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButton1.setText("USUARIOS");
+        btGerUser.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btGerUser.setText("USUARIOS");
+        btGerUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGerUserActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButton2.setText("PALESTRAS");
+        btGerPl.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btGerPl.setText("PALESTRAS");
+        btGerPl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGerPlActionPerformed(evt);
+            }
+        });
 
-        jButton3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButton3.setText("PALESTRANTES");
+        btGerPll.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btGerPll.setText("PALESTRANTES");
+        btGerPll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGerPllActionPerformed(evt);
+            }
+        });
+
+        btSair.setFont(new java.awt.Font("Dialog", 0, 13)); // NOI18N
+        btSair.setText("Sair");
+        btSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(125, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btSair, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 115, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(rtGen)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(113, 113, 113))
+                    .addComponent(btGerPl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btGerUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btGerPll, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                    .addComponent(rtGer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(rtGen)
-                .addGap(35, 35, 35)
-                .addComponent(jButton1)
-                .addGap(31, 31, 31)
-                .addComponent(jButton2)
-                .addGap(35, 35, 35)
-                .addComponent(jButton3)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addComponent(rtGer)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(btGerUser)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(btGerPl)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(btGerPll)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addComponent(btSair)
+                .addGap(13, 13, 13))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+        int opt = JOptionPane.showConfirmDialog(
+                rootPane,
+                "Deseja sair?",
+                "Saida",
+                JOptionPane.YES_NO_OPTION
+                );
+        
+        if(opt == 0) dispose();
+    }//GEN-LAST:event_btSairActionPerformed
+
+    private void btGerUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGerUserActionPerformed
+        JAdminUsuarios jau = new JAdminUsuarios();
+        
+        this.dispose();
+        jau.setVisible(true);
+    }//GEN-LAST:event_btGerUserActionPerformed
+
+    private void btGerPlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGerPlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btGerPlActionPerformed
+
+    private void btGerPllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGerPllActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btGerPllActionPerformed
 
     /**
      * @param args the command line arguments
@@ -108,19 +162,12 @@ public class JAdmin extends javax.swing.JFrame {
             }
         });
     }
-    
-    private String user;
-    public void setUser(String user){
-        this.user = user;
-    }
-    public String getUser(){
-        return user;
-    }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel rtGen;
+    private javax.swing.JButton btGerPl;
+    private javax.swing.JButton btGerPll;
+    private javax.swing.JButton btGerUser;
+    private javax.swing.JButton btSair;
+    private javax.swing.JLabel rtGer;
     // End of variables declaration//GEN-END:variables
 }
