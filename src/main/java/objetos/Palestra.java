@@ -13,10 +13,6 @@ public class Palestra{
     private LocalTime hora;
     private int vagas;
 
-    //private List<Palestrante> palestrantes;
-    //private List<Usuario> inscritos;
-
-  
     // Construtor
     public Palestra(){
         this.titulo = "";

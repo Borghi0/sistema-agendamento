@@ -12,6 +12,8 @@ public class UsuarioControle{
     private static final List<Usuario> usuarios = new LinkedList<>();
     private static UsuarioControle usuarioControleUnic;
     
+    private UsuarioControle(){}
+    
     public static UsuarioControle getUsuarioControle(){
         if(usuarioControleUnic == null) usuarioControleUnic = new UsuarioControle();
         return usuarioControleUnic;
