@@ -1,3 +1,4 @@
+
 // src/main/java/controle/UsuarioControle.java
 package main.java.controle;
 
@@ -18,6 +19,8 @@ public class UsuarioControle {
     private static final Pattern USERNAME_PATTERN = Pattern.compile(
         "^[a-zA-Z0-9_]{5,20}$");
     
+    private UsuarioControle(){}
+  
     public static UsuarioControle getUsuarioControle() {
         if (usuarioControleUnic == null) {
             usuarioControleUnic = new UsuarioControle();
