@@ -9,10 +9,11 @@ import java.util.List;
 public class Palestra{
     // atributos
     private String titulo;
-    private String local; // criar uma classe endereço se possível
+    private String local;
     private LocalDate data;
     private LocalTime hora;
     private int vagas;
+    private int codigo;
 
     // Construtor
     public Palestra(){
@@ -22,12 +23,13 @@ public class Palestra{
         this.hora = LocalTime.now();
         this.vagas = 0;
     }
-    public Palestra(String titulo, String local, LocalDate data, LocalTime hora, int vagas){
+    public Palestra(String titulo, String local, LocalDate data, LocalTime hora, int vagas, int codigo){
         this.titulo = titulo;
         this.local = local;
         this.data = data;
         this.hora = hora;
         this.vagas = vagas;
+        this.codigo = codigo;
     }
 
     // Getters
@@ -50,6 +52,9 @@ public class Palestra{
     public int getVagas(){
         return vagas;
     }
+    public int getCodigo(){
+        return codigo;
+    }
 
     // Setters
     public void setTitulo(String titulo){
@@ -70,5 +75,8 @@ public class Palestra{
 
     public void setVagas(int vagas){
         this.vagas = vagas;
+    }
+    public void setCodigo(int codigo){
+        this.codigo = codigo;
     }
 }

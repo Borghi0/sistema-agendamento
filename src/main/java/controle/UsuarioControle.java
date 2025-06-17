@@ -1,11 +1,12 @@
-
 // src/main/java/controle/UsuarioControle.java
 package main.java.controle;
+
+import main.java.objetos.*;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
-import main.java.objetos.*;
+
 
 public class UsuarioControle {
     private static final List<Usuario> usuarios = new LinkedList<>();
@@ -117,7 +118,7 @@ public class UsuarioControle {
             throw new IllegalArgumentException("Email/usuário não pode ser vazio");
         }
         
-        if (senha == null || senha.isEmpty()) {
+        if (senha == null || senha.isBlank()) {
             throw new IllegalArgumentException("Senha não pode ser vazia");
         }
         
@@ -191,5 +192,12 @@ public class UsuarioControle {
             return false;
         }
         return USERNAME_PATTERN.matcher(username).matches();
+    }
+    
+    public static void autoInscricao(Palestra palestra){
+        for(Palestra p : MenuControle.getUsuarioAtual().getPalestras()){ // verifica se já está inscrito na palestra
+            if(p.getCodigo()==palestra.getCodigo()) return;
+        }
+        if(palestra!=null) MenuControle.getUsuarioAtual().getPalestras().add(palestra);
     }
 }
