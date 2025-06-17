@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+
 public class JCadastro extends javax.swing.JFrame {
     static JCadastro cadUnic;
     /**
