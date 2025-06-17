@@ -5,11 +5,10 @@ import main.java.controle.*;
 
 
 public class JUser extends javax.swing.JFrame {
-
+    
     public JUser() {
         initComponents();
         setLocationRelativeTo(null); // Inicia a janela centralizada
-        rtBemVindoMSG.setText("Bem Vindo "+MenuControle.getUsuarioAtual().getNome()+"!");
     }
 
     /**
@@ -26,12 +25,17 @@ public class JUser extends javax.swing.JFrame {
         mbBarra = new javax.swing.JMenuBar();
         mOpcoes = new javax.swing.JMenu();
         miPalestras = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        miInscricoes = new javax.swing.JMenuItem();
         miSair = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         rtBemVindoMSG.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
@@ -47,9 +51,14 @@ public class JUser extends javax.swing.JFrame {
         });
         mOpcoes.add(miPalestras);
 
-        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jMenuItem2.setText("jMenuItem2");
-        mOpcoes.add(jMenuItem2);
+        miInscricoes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        miInscricoes.setText("Inscrições...");
+        miInscricoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miInscricoesActionPerformed(evt);
+            }
+        });
+        mOpcoes.add(miInscricoes);
 
         miSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         miSair.setText("Sair...");
@@ -89,9 +98,22 @@ public class JUser extends javax.swing.JFrame {
     }//GEN-LAST:event_miSairActionPerformed
 
     private void miPalestrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPalestrasActionPerformed
+        JPalestra.getJPalestra().setCompleto(true);
+        JPalestra.getJPalestra().setInscritas(false);
         JPalestra.getJPalestra().setVisible(true);
         dispose();
     }//GEN-LAST:event_miPalestrasActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        rtBemVindoMSG.setText("Bem Vindo "+MenuControle.getUsuarioAtual().getNome()+"!");
+    }//GEN-LAST:event_formWindowActivated
+
+    private void miInscricoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miInscricoesActionPerformed
+        JPalestra.getJPalestra().setInscritas(true);
+        JPalestra.getJPalestra().setCompleto(false);
+        JPalestra.getJPalestra().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_miInscricoesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,9 +152,9 @@ public class JUser extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu mOpcoes;
     private javax.swing.JMenuBar mbBarra;
+    private javax.swing.JMenuItem miInscricoes;
     private javax.swing.JMenuItem miPalestras;
     private javax.swing.JMenuItem miSair;
     private javax.swing.JLabel rtBemVindoMSG;

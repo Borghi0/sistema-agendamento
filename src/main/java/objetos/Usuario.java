@@ -1,6 +1,9 @@
 // src/main/java/objetos/Usuario.java
 package main.java.objetos;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Usuario extends Pessoa{
     // atributos
     private String email;
@@ -9,6 +12,7 @@ public class Usuario extends Pessoa{
     private boolean adm_flag;     // flag de admin
     private boolean colab_flag;  // flag de colaborador
     
+    private List<Palestra> palestras;
     
     //construtor
     public Usuario(){
@@ -17,6 +21,7 @@ public class Usuario extends Pessoa{
         this.user = "";
         this.adm_flag = false;
         this.colab_flag = false;
+        palestras = new LinkedList<>();
     }
     public Usuario(String nome, String cpf, String email, String senha, String user, boolean adm_flag, boolean colab_flag){
         super(nome, cpf);
@@ -25,6 +30,7 @@ public class Usuario extends Pessoa{
         this.user = user;
         this.adm_flag = adm_flag;
         this.colab_flag = colab_flag;
+        palestras = new LinkedList<>();
     }
 
     //getters
@@ -45,6 +51,9 @@ public class Usuario extends Pessoa{
     }
     public boolean getColab_flag(){
         return colab_flag;
+    }
+    public List<Palestra> getPalestras(){
+        return palestras;
     }
 
     //setters

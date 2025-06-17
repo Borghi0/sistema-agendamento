@@ -6,19 +6,21 @@ import main.java.controle.PalestraControle;
 import main.java.controle.MenuControle;
 
 import java.awt.Font;
+import java.util.LinkedList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import main.java.controle.UsuarioControle;
 
-/**
- *
- * @author joaop
- */
+
 public class JPalestra extends javax.swing.JFrame {
     private static JPalestra jPalestraUnic = null;    
-    /**
-     * Creates new form JPalestra
-     */
+    private List<Integer> palestraCod = new LinkedList<>();
+    private boolean completo;
+    private boolean inscritas;
+        
     public JPalestra() {
         initComponents();
         
@@ -77,6 +79,11 @@ public class JPalestra extends javax.swing.JFrame {
         });
         tbPalestra.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tbPalestra.setRowHeight(30);
+        tbPalestra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPalestraMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbPalestra);
         if (tbPalestra.getColumnModel().getColumnCount() > 0) {
             tbPalestra.getColumnModel().getColumn(0).setPreferredWidth(350);
@@ -125,24 +132,107 @@ public class JPalestra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        listarTabPalestras();
+        if(inscritas) listarTabPalestrasI();
+        else if(completo) listarTabPalestrasC();
     }//GEN-LAST:event_formWindowActivated
 
     private void miVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miVoltarActionPerformed
         voltar();
     }//GEN-LAST:event_miVoltarActionPerformed
 
-    public void listarTabPalestras(){
+    private void tbPalestraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPalestraMouseClicked
+        if(inscritas) selecTabI();
+        else if(completo) selecTabC();
+    }//GEN-LAST:event_tbPalestraMouseClicked
+
+    public void listarTabPalestrasC(){
         DefaultTableModel modelo = (DefaultTableModel) tbPalestra.getModel();       
 
         int lin = 0;
         modelo.setRowCount(lin);
         
+        palestraCod.clear();
+        
         for(Palestra p : PalestraControle.getPalestras()){
             modelo.insertRow(lin, new Object[]{p.getTitulo(), p.getLocal(), p.getData()});
+            palestraCod.add(p.getCodigo());
             lin++;
         }
     }
+    public void listarTabPalestrasI(){
+        DefaultTableModel modelo = (DefaultTableModel) tbPalestra.getModel();       
+
+        int lin = 0;
+        modelo.setRowCount(lin);
+        
+        palestraCod.clear();
+        
+        for(Palestra p : MenuControle.getUsuarioAtual().getPalestras()){
+            modelo.insertRow(lin, new Object[]{p.getTitulo(), p.getLocal(), p.getData()});
+            palestraCod.add(p.getCodigo());
+            lin++;
+        }
+    }
+    
+    public void selecTabC(){
+        int linSelec = tbPalestra.getSelectedRow();
+
+        if(linSelec == -1) return;
+        
+        int palestraSelecCod = palestraCod.get(linSelec);
+        
+        Palestra palestraSelec = null;
+
+        for(Palestra p : PalestraControle.getPalestras()){
+            if (p.getCodigo() == palestraSelecCod) {
+                palestraSelec = p;
+                break;
+            }
+        }
+
+        if(palestraSelec != null){
+            String mensagem = "Título: " + palestraSelec.getTitulo() +
+                              "\nLocal: " + palestraSelec.getLocal() +
+                              "\nData: " + palestraSelec.getData() +
+                              "\nHora: " + palestraSelec.getHora() +
+                              "\nVagas: " + palestraSelec.getVagas();
+            
+            int o = JOptionPane.showOptionDialog(
+                    null, mensagem, "Detalhes da Palestra",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
+                    null, new String[]{"Voltar", "Se Inscrever"}, "Voltar"
+            );
+
+            if(o == 1) UsuarioControle.autoInscricao(palestraSelec);
+        }
+    }
+    public void selecTabI(){
+        int linSelec = tbPalestra.getSelectedRow();
+
+        if(linSelec == -1) return;
+        
+        int palestraSelecCod = palestraCod.get(linSelec);
+        
+        Palestra palestraSelec = null;
+
+        for(Palestra p : MenuControle.getUsuarioAtual().getPalestras()){
+            if (p.getCodigo() == palestraSelecCod) {
+                palestraSelec = p;
+                break;
+            }
+        }
+
+        if(palestraSelec != null){
+            String mensagem = "Título: " + palestraSelec.getTitulo() +
+                              "\nLocal: " + palestraSelec.getLocal() +
+                              "\nData: " + palestraSelec.getData() +
+                              "\nHora: " + palestraSelec.getHora() +
+                              "\nVagas: " + palestraSelec.getVagas();
+            
+            JOptionPane.showMessageDialog(null, mensagem, "Detalhes da Palestra", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
     
     public void voltar(){
         MenuControle.getMenuUser().setVisible(true);
@@ -191,4 +281,12 @@ public class JPalestra extends javax.swing.JFrame {
     private javax.swing.JMenuItem miVoltar;
     private javax.swing.JTable tbPalestra;
     // End of variables declaration//GEN-END:variables
+
+    void setCompleto(boolean b) {
+        this.completo = b;
+    }
+
+    void setInscritas(boolean b) {
+        this.inscritas = b;
+    }
 }
