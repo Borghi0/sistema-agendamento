@@ -6,7 +6,7 @@ import main.java.objetos.*;
 
 
 public class MenuControle {
-    private static Usuario usuarioAtual = new Usuario();
+    private static Usuario usuarioAtual = null;
     public static JInicial menuInicial = new JInicial();
     public static JCadastro menuCadastro = new JCadastro();
     private static JAdmin menuAdmin = new JAdmin();
