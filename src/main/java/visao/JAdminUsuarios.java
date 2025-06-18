@@ -4,15 +4,36 @@
  */
 package main.java.visao;
 import main.java.objetos.*;
-import main.java.controle.UsuarioControle;
+import main.java.controle.*;
+import main.java.exceptions.DelUserAtualException;
+
+import javax.swing.Timer;
+import java.awt.event.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import javax.swing.JCheckBox;
 
 public class JAdminUsuarios extends javax.swing.JFrame {
-
+    UsuarioControle uc = UsuarioControle.getUsuarioControle();
+    Usuario u = null;
+    
+    ActionListener apagaAviso = new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent evt){
+            rtAviso.setVisible(false);
+            tempo.stop();
+        }
+    };
+            
+    Timer tempo = new Timer(1500, apagaAviso);
+    
     public JAdminUsuarios() {
         initComponents();
         rtAviso.setVisible(false);
+        
+        UsuarioControle.cadastrar("Arthur Henrique Jardim da Cunha Pinto", 
+            "41000873811", "arthurhcaron@gmail.com", "PlutPlatZoom16$", 
+            "PlutPlatZoom16$", "bobao", false, false);
     }
 
     /**
@@ -59,9 +80,19 @@ public class JAdminUsuarios extends javax.swing.JFrame {
 
         btUserU.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         btUserU.setText("ATUALIZAR");
+        btUserU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUserUActionPerformed(evt);
+            }
+        });
 
         btUserD.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         btUserD.setText("DELETAR");
+        btUserD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUserDActionPerformed(evt);
+            }
+        });
 
         btVoltar.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         btVoltar.setText("Voltar");
@@ -79,6 +110,11 @@ public class JAdminUsuarios extends javax.swing.JFrame {
                 cxUserActionPerformed(evt);
             }
         });
+        cxUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cxUserKeyPressed(evt);
+            }
+        });
 
         rtAviso.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         rtAviso.setForeground(new java.awt.Color(255, 51, 51));
@@ -89,39 +125,39 @@ public class JAdminUsuarios extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(btUserR)
                 .addGap(18, 18, 18)
                 .addComponent(btUserU)
                 .addGap(18, 18, 18)
-                .addComponent(btUserD, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btUserD, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(rtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cxUser, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(rtAviso)
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addGap(0, 27, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rtCpf)
                     .addComponent(cxUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rtAviso))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btUserR)
                     .addComponent(btUserU)
@@ -138,18 +174,61 @@ public class JAdminUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_cxUserActionPerformed
 
     private void btUserRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUserRActionPerformed
+        ler();
+    }//GEN-LAST:event_btUserRActionPerformed
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        voltar();
+    }//GEN-LAST:event_btVoltarActionPerformed
+
+    private void btUserUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUserUActionPerformed
+        atualizar();
+    }//GEN-LAST:event_btUserUActionPerformed
+
+    private void btUserDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUserDActionPerformed
+        try{
+            deletar();
+        } catch(DelUserAtualException duae){
+            JOptionPane.showMessageDialog(null, "Nao se pode deletar usuario atual",
+                    "Erro delecao de usuario", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btUserDActionPerformed
+
+    private void cxUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxUserKeyPressed
+        ler(evt);
+    }//GEN-LAST:event_cxUserKeyPressed
+    
+    private void compTabela(){
         DefaultTableModel modelo = (DefaultTableModel) tbUsers.getModel();
-        Usuario u = null;
+        int linha = 0;
+        
+        modelo.setRowCount(0);
+        
+        for(Usuario u1 : UsuarioControle.getUsuarios()){
+            modelo.insertRow(linha, new Object[]{u1.getNome(), u1.getCpf(),
+                                                 (u1.getAdm_flag() ? "Sim" : "Nao"),
+                                                 (u1.getColab_flag() ? "Sim" : "Nao"),
+                                                 u1.getEmail()
+                                                 });
+            linha++;
+        }
+        
+    }
+    
+    private void ler(){
+        DefaultTableModel modelo = (DefaultTableModel) tbUsers.getModel();
+        u = null;
         
         if("".equals(cxUser.getText())) compTabela();
         else{
+            modelo.setRowCount(0);
+            
             for(Usuario u2 : UsuarioControle.getUsuarios()){
                 if(u2.getCpf().equals(cxUser.getText())) u = u2;
             }
             
-            if(u == null) rtAviso.setVisible(true);
+            if(u == null){ rtAviso.setVisible(true); tempo.start();}
             else{
-                modelo.setRowCount(0);
                 modelo.insertRow(0, new Object[]{u.getNome(), u.getCpf(),
                                                  (u.getAdm_flag() ? "Sim" : "Nao"),
                                                  (u.getColab_flag() ? "Sim" : "Nao"),
@@ -157,9 +236,54 @@ public class JAdminUsuarios extends javax.swing.JFrame {
                                                  });
             }
         }
-    }//GEN-LAST:event_btUserRActionPerformed
-
-    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+    }
+    
+    private void ler(java.awt.event.KeyEvent evt){
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) ler();
+    }
+    private void deletar() throws DelUserAtualException{
+        boolean check = false;
+        u = uc.buscarCpf(cxUser.getText());
+        
+        if(u == null){ rtAviso.setVisible(true); tempo.start();}
+        else{
+            if(u.equals(MenuControle.getUsuarioAtual()))
+                throw new DelUserAtualException();
+            else{
+                check = uc.deletar(u);
+                
+                if(check)
+                    JOptionPane.showMessageDialog(null, "Deletado com sucesso");
+                
+                compTabela();
+            }
+        }
+    }
+    
+    private void atualizar(){
+        JCheckBox cbAdmin = new JCheckBox("Admin"),
+                  cbColab = new JCheckBox("Colaborador");
+        String msg = "Atualizar permissoes";
+        Object[] parente = {msg, cbAdmin, cbColab};
+        int opt = 0;
+        
+        u = uc.buscarCpf(cxUser.getText());
+        
+        if(u == null){ rtAviso.setVisible(true); tempo.start();}
+        else{
+            opt = JOptionPane.showConfirmDialog(null, parente, "Permissoes",
+                    JOptionPane.OK_CANCEL_OPTION);
+            
+            if(opt == 0){
+                u.setAdm_flag(cbAdmin.isSelected());
+                u.setColab_flag(cbColab.isSelected());
+            }
+            
+            compTabela();
+        }
+    }
+    
+    public void voltar(){
         JAdmin ja = new JAdmin();
         int opt = JOptionPane.showConfirmDialog(
                                                 null,
@@ -171,25 +295,7 @@ public class JAdminUsuarios extends javax.swing.JFrame {
             this.dispose();
             ja.setVisible(true);
         }
-    }//GEN-LAST:event_btVoltarActionPerformed
-    
-    private void compTabela(){
-        DefaultTableModel modelo = (DefaultTableModel) tbUsers.getModel();
-        int linha = 0;
-        
-        for(Usuario u : UsuarioControle.getUsuarios()){
-            modelo.insertRow(linha, new Object[]{u.getNome(), u.getCpf(),
-                                                 (u.getAdm_flag() ? "Sim" : "Nao"),
-                                                 (u.getColab_flag() ? "Sim" : "Nao"),
-                                                 u.getEmail()
-                                                 });
-            linha++;
-        }
-        
     }
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -216,6 +322,7 @@ public class JAdminUsuarios extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new JAdminUsuarios().setVisible(true);
             }
