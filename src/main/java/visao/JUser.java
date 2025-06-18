@@ -91,14 +91,11 @@ public class JUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSairActionPerformed
-        MenuControle.setUsuarioAtual(null);
-        dispose();
-        MenuControle.menuInicial.setVisible(true);
+        sair();
     }//GEN-LAST:event_miSairActionPerformed
 
     private void miPalestrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPalestrasActionPerformed
         JPalestra.getJPalestra().setCompleto(true);
-        JPalestra.getJPalestra().setInscritas(false);
         JPalestra.getJPalestra().setVisible(true);
         dispose();
     }//GEN-LAST:event_miPalestrasActionPerformed
@@ -109,12 +106,15 @@ public class JUser extends javax.swing.JFrame {
 
     private void miInscricoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miInscricoesActionPerformed
         JPalestra.getJPalestra().setInscritas(true);
-        JPalestra.getJPalestra().setCompleto(false);
         JPalestra.getJPalestra().setVisible(true);
         dispose();
     }//GEN-LAST:event_miInscricoesActionPerformed
 
-    
+    public void sair(){
+        MenuControle.setUsuarioAtual(null);
+        dispose();
+        MenuControle.menuInicial.setVisible(true);
+    }
     
     
     public static void main(String args[]) {
