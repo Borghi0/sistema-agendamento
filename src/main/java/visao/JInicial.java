@@ -233,6 +233,7 @@ public final class JInicial extends javax.swing.JFrame {
     public void entrar(){
         if(MenuControle.entrar(cxUser.getText(), csSenha.getPassword())){
             dispose();
+            csSenha.setText("");
             rtErro.setVisible(false);
         }
         else{

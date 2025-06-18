@@ -237,6 +237,7 @@ public class JPalestra extends javax.swing.JFrame {
     public void voltar(){
         MenuControle.getMenuUser().setVisible(true);
         dispose();
+        setFlags(false);
     }
     
     /**
@@ -282,11 +283,18 @@ public class JPalestra extends javax.swing.JFrame {
     private javax.swing.JTable tbPalestra;
     // End of variables declaration//GEN-END:variables
 
-    void setCompleto(boolean b) {
+    public void setCompleto(boolean b) {
         this.completo = b;
     }
 
-    void setInscritas(boolean b) {
+    public void setInscritas(boolean b) {
+        this.inscritas = b;
+    }
+    
+    
+    // coloque as flags novas aqui
+    public void setFlags(boolean b){
+        this.completo = b;
         this.inscritas = b;
     }
 }
