@@ -197,12 +197,12 @@ public class UsuarioControle {
     public static void autoInscricao(Palestra palestra){
         if(palestra!=null){
             for(Palestra p : MenuControle.getUsuarioAtual().getPalestras()){ // verifica se já está inscrito na palestra
-                if(p.getCodigo()==palestra.getCodigo()) return;
+                if(p.getCodigo()==palestra.getCodigo()) throw new IllegalArgumentException("Já inscrito");
             }
             if(palestra.getVagas()>0){
                 MenuControle.getUsuarioAtual().getPalestras().add(palestra);
                 palestra.setVagas(palestra.getVagas()-1);
-            }        
+            } else throw new IllegalArgumentException("Não há vagas");        
         }
     }
 }
