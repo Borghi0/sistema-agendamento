@@ -195,9 +195,14 @@ public class UsuarioControle {
     }
     
     public static void autoInscricao(Palestra palestra){
-        for(Palestra p : MenuControle.getUsuarioAtual().getPalestras()){ // verifica se já está inscrito na palestra
-            if(p.getCodigo()==palestra.getCodigo()) return;
+        if(palestra!=null){
+            for(Palestra p : MenuControle.getUsuarioAtual().getPalestras()){ // verifica se já está inscrito na palestra
+                if(p.getCodigo()==palestra.getCodigo()) return;
+            }
+            if(palestra.getVagas()>0){
+                MenuControle.getUsuarioAtual().getPalestras().add(palestra);
+                palestra.setVagas(palestra.getVagas()-1);
+            }        
         }
-        if(palestra!=null) MenuControle.getUsuarioAtual().getPalestras().add(palestra);
     }
 }
