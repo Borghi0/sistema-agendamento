@@ -36,7 +36,7 @@ public class PalestranteControle {
         Palestrante correspondente = buscarCpf(cpf);
         
         if(correspondente == null) 
-            if(MenuControle.validarCPF(cpf)) palestrantes.add(pll);
+            if(Verificacao.validarCPF(cpf)) palestrantes.add(pll);
             else throw new IllegalArgumentException();
         else throw new PalestranteExistenteException();
         

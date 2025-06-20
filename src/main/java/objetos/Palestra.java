@@ -27,7 +27,7 @@ public class Palestra{
         this.vagas = 0;
         palestrantes = new LinkedList<>();
     }
-    public Palestra(String titulo, String local, LocalDate data, LocalTime hora, int vagas, int codigo){
+    public Palestra(String titulo, String local, LocalDate data, LocalTime hora, int vagas, int codigo, Palestrante pal){
         this.titulo = titulo;
         this.local = local;
         this.data = data;
@@ -86,5 +86,9 @@ public class Palestra{
     }
     public void setCodigo(int codigo){
         this.codigo = codigo;
+    }
+    
+    public void setPalestrante(Palestrante pal){
+        this.pal = pal;
     }
 }
