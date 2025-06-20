@@ -113,6 +113,27 @@ public class UsuarioControle {
         return correspondencia;
     }
     
+    public Usuario buscarCpf(String cpf){
+        Usuario u = null;
+        
+        for(Usuario u1 : usuarios)
+            if(u1.getCpf().equals(cpf)) u = u1;
+        
+        return u;
+    }
+    
+    public boolean deletar(Usuario u){
+        String cpf = u.getCpf();
+        boolean existe = false;
+        
+        for(Usuario u1 : usuarios)
+            if(u1.getCpf().equals(cpf)) existe = true;
+        
+        if(existe) usuarios.remove(u);
+        
+        return existe;
+    }
+    
     public static Usuario entrar(String userEmail, String senha) {
         if (userEmail == null || userEmail.trim().isEmpty()) {
             throw new IllegalArgumentException("Email/usuário não pode ser vazio");
