@@ -104,6 +104,11 @@ public class JCadastro extends javax.swing.JFrame {
         rtCPF.setText("CPF:");
 
         cxCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cxCPF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cxCPFFocusLost(evt);
+            }
+        });
         cxCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cxCPFActionPerformed(evt);
@@ -372,6 +377,10 @@ public class JCadastro extends javax.swing.JFrame {
         voltar(evt);
     }//GEN-LAST:event_btVoltarKeyPressed
 
+    private void cxCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cxCPFFocusLost
+    cxCPF.setText(cxCPF.getText().replaceAll("[^0-9]", ""));
+    }//GEN-LAST:event_cxCPFFocusLost
+
     public void voltar(){
         dispose();
         MenuControle.menuInicial.setVisible(true);
@@ -384,6 +393,7 @@ public class JCadastro extends javax.swing.JFrame {
     }
     
     public void cadTenta(){
+        cxCPF.setText(cxCPF.getText().replaceAll("[^0-9]", ""));
         boolean c = false;
         try{
             UsuarioControle.cadastrar(cxNome.getText(), cxCPF.getText(), cxEmail.getText(),

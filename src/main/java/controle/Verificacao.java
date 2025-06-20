@@ -7,8 +7,6 @@ public abstract class Verificacao {
      // Padrões regex para validação
     private static final Pattern EMAIL_PATTERN = Pattern.compile(
         "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
-    private static final Pattern CPF_PATTERN = Pattern.compile(
-        "^(\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2})$");
     private static final Pattern USERNAME_PATTERN = Pattern.compile(
         "^[a-zA-Z0-9_]{5,20}$");
     
@@ -23,10 +21,7 @@ public abstract class Verificacao {
     public static boolean validarCPF(String cpf) {
         if (cpf == null || cpf.trim().isEmpty()) {
             return false;
-        }
-        
-        // Remove caracteres não numéricos
-        cpf = cpf.replaceAll("[^0-9]", "");
+        }        
         
         // Verifica se tem 11 dígitos
         if (cpf.length() != 11) {
