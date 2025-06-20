@@ -14,7 +14,7 @@ public class Palestra{
     private LocalTime hora;
     private int vagas;
     private int codigo;
-
+    private Palestrante pal;
     // Construtor
     public Palestra(){
         this.titulo = "";
@@ -22,14 +22,16 @@ public class Palestra{
         this.data = LocalDate.now();
         this.hora = LocalTime.now();
         this.vagas = 0;
+        this.pal = new Palestrante();
     }
-    public Palestra(String titulo, String local, LocalDate data, LocalTime hora, int vagas, int codigo){
+    public Palestra(String titulo, String local, LocalDate data, LocalTime hora, int vagas, int codigo, Palestrante pal){
         this.titulo = titulo;
         this.local = local;
         this.data = data;
         this.hora = hora;
         this.vagas = vagas;
         this.codigo = codigo;
+        this.pal = pal;
     }
 
     // Getters
@@ -55,7 +57,10 @@ public class Palestra{
     public int getCodigo(){
         return codigo;
     }
-
+    
+    public Palestrante getPalestrante(){
+        return pal;
+    }
     // Setters
     public void setTitulo(String titulo){
         this.titulo = titulo;
@@ -78,5 +83,9 @@ public class Palestra{
     }
     public void setCodigo(int codigo){
         this.codigo = codigo;
+    }
+    
+    public void setPalestrante(Palestrante pal){
+        this.pal = pal;
     }
 }

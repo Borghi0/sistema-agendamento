@@ -110,7 +110,7 @@ public class JAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btSairActionPerformed
 
     private void btGerUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGerUserActionPerformed
-        JAdminUsuarios jau = new JAdminUsuarios();
+        JAdminUsuarios jau = JAdminUsuarios.getJAdminUsuarios();
         
         this.dispose();
         jau.setVisible(true);
@@ -121,7 +121,10 @@ public class JAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btGerPlActionPerformed
 
     private void btGerPllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGerPllActionPerformed
-        // TODO add your handling code here:
+        JAdminPll japll = JAdminPll.getJAdminPll();
+        
+        this.dispose();
+        japll.setVisible(true);
     }//GEN-LAST:event_btGerPllActionPerformed
 
     /**

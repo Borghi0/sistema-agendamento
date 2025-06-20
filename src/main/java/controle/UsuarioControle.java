@@ -5,6 +5,7 @@ import main.java.objetos.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import main.java.exceptions.DelUserAtualException;
 
 public class UsuarioControle {
     private static final List<Usuario> usuarios = new LinkedList<>();
@@ -32,11 +33,11 @@ public class UsuarioControle {
             throw new IllegalArgumentException("Nome não pode ser vazio");
         }
         
-        if (!MenuControle.validarCPF(cpf)) {
+        if (!Verificacao.validarCPF(cpf)) {
             throw new IllegalArgumentException("CPF inválido");
         }
         
-        if (!MenuControle.validarEmail(email)) {
+        if (!Verificacao.validarEmail(email)) {
             throw new IllegalArgumentException("Email inválido");
         }
         
@@ -48,7 +49,7 @@ public class UsuarioControle {
             throw new IllegalArgumentException("Senhas não correspondem");
         }
         
-        if (!MenuControle.validarUsername(user)) {
+        if (!Verificacao.validarUsername(user)) {
             throw new IllegalArgumentException("Username deve ter entre 5 e 20 caracteres alfanuméricos");
         }
         
@@ -114,9 +115,11 @@ public class UsuarioControle {
         return u;
     }
     
-    public boolean deletar(Usuario u){
+    public boolean deletar(Usuario u) throws DelUserAtualException{
         String cpf = u.getCpf();
         boolean existe = false;
+        
+        if(MenuControle.getUsuarioAtual().equals(u)) throw new DelUserAtualException();
         
         for(Usuario u1 : usuarios)
             if(u1.getCpf().equals(cpf)) existe = true;
