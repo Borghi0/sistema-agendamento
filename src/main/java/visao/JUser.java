@@ -3,6 +3,8 @@ package main.java.visao;
 
 import main.java.controle.*;
 
+import javax.swing.JOptionPane;
+
 
 public class JUser extends javax.swing.JFrame {
     
@@ -111,9 +113,17 @@ public class JUser extends javax.swing.JFrame {
     }//GEN-LAST:event_miInscricoesActionPerformed
 
     public void sair(){
-        MenuControle.setUsuarioAtual(null);
-        dispose();
-        MenuControle.menuInicial.setVisible(true);
+            
+        int o = JOptionPane.showOptionDialog(
+                null, "Deseja realmente sair?", "Sair",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, 
+                null, new String[]{"Não", "Sim"}, ""
+        );
+        if(o == 1){
+            MenuControle.setUsuarioAtual(null);
+            dispose();
+            MenuControle.menuInicial.setVisible(true);
+        }
     }
     
     
