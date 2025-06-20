@@ -205,6 +205,10 @@ public class JListaPalestras extends javax.swing.JFrame {
                 JListaPalestrantes.getJListaPalestrantes().setPalestra(true);
                 JListaPalestrantes.getJListaPalestrantes().setPalestraSelec(palestraSelec);
                 JListaPalestrantes.getJListaPalestrantes().setVisible(true);
+                
+                JListaPalestrantes.getJListaPalestrantes().setExtendedState(javax.swing.JFrame.NORMAL);
+                JListaPalestrantes.getJListaPalestrantes().toFront();
+                JListaPalestrantes.getJListaPalestrantes().requestFocus();
             }
             else if(o == 2){
                 try {

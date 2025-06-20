@@ -27,14 +27,15 @@ public class Palestra{
         this.vagas = 0;
         palestrantes = new LinkedList<>();
     }
-    public Palestra(String titulo, String local, LocalDate data, LocalTime hora, int vagas, int codigo, Palestrante pal){
+    public Palestra(String titulo, String local, LocalDate data, LocalTime hora, int vagas, int codigo, LinkedList<Palestrante> palestrantes){
         this.titulo = titulo;
         this.local = local;
         this.data = data;
         this.hora = hora;
         this.vagas = vagas;
         this.codigo = codigo;
-        palestrantes = new LinkedList<>();
+        if(palestrantes!=null) this.palestrantes = palestrantes;
+        else this.palestrantes = new LinkedList<>();
     }
 
     // Getters

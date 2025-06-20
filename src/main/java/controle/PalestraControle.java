@@ -26,8 +26,8 @@ public class PalestraControle {
         return palestras;
     }
     
-    public static void cadastrar(String titulo, String local, LocalDate data, LocalTime hora, int vagas, Palestrante pal){
-        palestras.add(new Palestra(titulo, local, data, hora, vagas, getCodUnic(), pal));
+    public static void cadastrar(String titulo, String local, LocalDate data, LocalTime hora, int vagas, LinkedList<Palestrante> palestrantes){
+        palestras.add(new Palestra(titulo, local, data, hora, vagas, getCodUnic(), palestrantes));
         ordenarBd();
     }
     public static int getCodUnic(){
