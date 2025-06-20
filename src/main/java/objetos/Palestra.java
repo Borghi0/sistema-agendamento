@@ -87,8 +87,4 @@ public class Palestra{
     public void setCodigo(int codigo){
         this.codigo = codigo;
     }
-    
-    public void setPalestrante(Palestrante pal){
-        this.pal = pal;
-    }
 }
