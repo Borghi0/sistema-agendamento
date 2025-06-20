@@ -95,8 +95,8 @@ public class JUser extends javax.swing.JFrame {
     }//GEN-LAST:event_miSairActionPerformed
 
     private void miPalestrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miPalestrasActionPerformed
-        JPalestra.getJPalestra().setCompleto(true);
-        JPalestra.getJPalestra().setVisible(true);
+        JListaPalestras.getJListaPalestras().setCompleto(true);
+        JListaPalestras.getJListaPalestras().setVisible(true);
         dispose();
     }//GEN-LAST:event_miPalestrasActionPerformed
 
@@ -105,8 +105,8 @@ public class JUser extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void miInscricoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miInscricoesActionPerformed
-        JPalestra.getJPalestra().setInscritas(true);
-        JPalestra.getJPalestra().setVisible(true);
+        JListaPalestras.getJListaPalestras().setInscritas(true);
+        JListaPalestras.getJListaPalestras().setVisible(true);
         dispose();
     }//GEN-LAST:event_miInscricoesActionPerformed
 

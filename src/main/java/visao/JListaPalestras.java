@@ -1,4 +1,4 @@
-/// src/main/java/visao/JPalestras.java
+// src/main/java/visao/JListaPalestras.java
 package main.java.visao;
 
 import main.java.objetos.Palestra;
@@ -15,24 +15,24 @@ import javax.swing.table.DefaultTableModel;
 import main.java.controle.UsuarioControle;
 
 
-public class JPalestra extends javax.swing.JFrame {
-    private static JPalestra jPalestraUnic = null;    
+public class JListaPalestras extends javax.swing.JFrame {
+    private static JListaPalestras jPalestrasUnic = null;    
     private List<Integer> palestraCod = new LinkedList<>();
     private boolean completo;
     private boolean inscritas;
         
-    public JPalestra() {
+    public JListaPalestras() {
         initComponents();
         
         setLocationRelativeTo(null); // Inicia a janela centralizada
         setExtendedState(MAXIMIZED_BOTH);
     }
 
-    public static JPalestra getJPalestra(){
-        if (jPalestraUnic == null) {
-            jPalestraUnic = new JPalestra();
+    public static JListaPalestras getJListaPalestras(){
+        if (jPalestrasUnic == null) {
+            jPalestrasUnic = new JListaPalestras();
         }
-        return jPalestraUnic;
+        return jPalestrasUnic;
     }
     
     
@@ -41,7 +41,7 @@ public class JPalestra extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbPalestra = new javax.swing.JTable();
+        tbPalestras = new javax.swing.JTable();
         barraMenu = new javax.swing.JMenuBar();
         mbOpcoes = new javax.swing.JMenu();
         miVoltar = new javax.swing.JMenuItem();
@@ -53,13 +53,10 @@ public class JPalestra extends javax.swing.JFrame {
             }
         });
 
-        tbPalestra.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tbPalestra.setModel(new javax.swing.table.DefaultTableModel(
+        tbPalestras.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        tbPalestras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Título", "Local", "Data"
@@ -73,24 +70,24 @@ public class JPalestra extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbPalestra.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tbPalestra.setRowHeight(30);
-        tbPalestra.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbPalestras.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tbPalestras.setRowHeight(30);
+        tbPalestras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbPalestraMouseClicked(evt);
+                tbPalestrasMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbPalestra);
-        if (tbPalestra.getColumnModel().getColumnCount() > 0) {
-            tbPalestra.getColumnModel().getColumn(0).setPreferredWidth(350);
-            tbPalestra.getColumnModel().getColumn(1).setPreferredWidth(300);
-            tbPalestra.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jScrollPane1.setViewportView(tbPalestras);
+        if (tbPalestras.getColumnModel().getColumnCount() > 0) {
+            tbPalestras.getColumnModel().getColumn(0).setPreferredWidth(350);
+            tbPalestras.getColumnModel().getColumn(1).setPreferredWidth(300);
+            tbPalestras.getColumnModel().getColumn(2).setPreferredWidth(100);
         }
         //minhas configs
-        tbPalestra.getColumnModel().getColumn(2).setCellRenderer(
+        tbPalestras.getColumnModel().getColumn(2).setCellRenderer(
             new DefaultTableCellRenderer(){{setHorizontalAlignment(SwingConstants.CENTER);}}
         );
-        tbPalestra.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 18));
+        tbPalestras.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 18));
         //fim
 
         mbOpcoes.setText("Opções");
@@ -136,13 +133,13 @@ public class JPalestra extends javax.swing.JFrame {
         voltar();
     }//GEN-LAST:event_miVoltarActionPerformed
 
-    private void tbPalestraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPalestraMouseClicked
+    private void tbPalestrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPalestrasMouseClicked
         if(inscritas) selecTabI();
         else if(completo) selecTabC();
-    }//GEN-LAST:event_tbPalestraMouseClicked
+    }//GEN-LAST:event_tbPalestrasMouseClicked
 
     public void listarTabPalestrasC(){
-        DefaultTableModel modelo = (DefaultTableModel) tbPalestra.getModel();       
+        DefaultTableModel modelo = (DefaultTableModel) tbPalestras.getModel();       
 
         int lin = 0;
         modelo.setRowCount(lin);
@@ -156,7 +153,7 @@ public class JPalestra extends javax.swing.JFrame {
         }
     }
     public void listarTabPalestrasI(){
-        DefaultTableModel modelo = (DefaultTableModel) tbPalestra.getModel();       
+        DefaultTableModel modelo = (DefaultTableModel) tbPalestras.getModel();       
 
         int lin = 0;
         modelo.setRowCount(lin);
@@ -168,10 +165,16 @@ public class JPalestra extends javax.swing.JFrame {
             palestraCod.add(p.getCodigo());
             lin++;
         }
+        if(lin==0){
+            JOptionPane.showMessageDialog(
+                null, "Você não está inscrito em nenhuma palestra", "Mensagem", JOptionPane.INFORMATION_MESSAGE
+            );
+            voltar();
+        }
     }
     
     public void selecTabC(){
-        int linSelec = tbPalestra.getSelectedRow();
+        int linSelec = tbPalestras.getSelectedRow();
 
         if(linSelec == -1) return;
         
@@ -196,10 +199,14 @@ public class JPalestra extends javax.swing.JFrame {
             int o = JOptionPane.showOptionDialog(
                     null, mensagem, "Detalhes da Palestra",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
-                    null, new String[]{"Voltar", "Se Inscrever"}, "Voltar"
+                    null, new String[]{"Voltar", "Palestrantes", "Se Inscrever"}, "Voltar"
             );
-
             if(o == 1){
+                JListaPalestrantes.getJListaPalestrantes().setPalestra(true);
+                JListaPalestrantes.getJListaPalestrantes().setPalestraSelec(palestraSelec);
+                JListaPalestrantes.getJListaPalestrantes().setVisible(true);
+            }
+            else if(o == 2){
                 try {
                     UsuarioControle.autoInscricao(palestraSelec);
                 } catch(IllegalArgumentException iae){
@@ -211,7 +218,7 @@ public class JPalestra extends javax.swing.JFrame {
         }
     }
     public void selecTabI(){
-        int linSelec = tbPalestra.getSelectedRow();
+        int linSelec = tbPalestras.getSelectedRow();
 
         if(linSelec == -1) return;
         
@@ -233,7 +240,16 @@ public class JPalestra extends javax.swing.JFrame {
                               "\nHora: " + palestraSelec.getHora() +
                               "\nVagas: " + palestraSelec.getVagas();
             
-            JOptionPane.showMessageDialog(null, mensagem, "Detalhes da Palestra", JOptionPane.INFORMATION_MESSAGE);
+            int o = JOptionPane.showOptionDialog(
+                    null, mensagem, "Detalhes da Palestra",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
+                    null, new String[]{"Palestrantes", "Ok"}, "Ok"
+            );
+            if(o == 0){
+                JListaPalestrantes.getJListaPalestrantes().setPalestra(true);
+                JListaPalestrantes.getJListaPalestrantes().setPalestraSelec(palestraSelec);
+                JListaPalestrantes.getJListaPalestrantes().setVisible(true);
+            }
         }
     }
     
@@ -260,20 +276,21 @@ public class JPalestra extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JPalestra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JListaPalestras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JPalestra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JListaPalestras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JPalestra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JListaPalestras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JPalestra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JListaPalestras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JPalestra().setVisible(true);
+                new JListaPalestras().setVisible(true);
             }
         });
     }
@@ -283,7 +300,7 @@ public class JPalestra extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu mbOpcoes;
     private javax.swing.JMenuItem miVoltar;
-    private javax.swing.JTable tbPalestra;
+    private javax.swing.JTable tbPalestras;
     // End of variables declaration//GEN-END:variables
 
     public void setCompleto(boolean b) {
