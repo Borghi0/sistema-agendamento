@@ -9,7 +9,9 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import main.java.controle.PalestranteControle;
+import main.java.exceptions.PalestranteExistenteException;
 import main.java.objetos.Palestrante;
 
 public class JAdminPll extends javax.swing.JFrame {
@@ -170,13 +172,13 @@ public class JAdminPll extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btVoltar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btPllR)
                         .addComponent(btPllU)
                         .addComponent(btPllD)
-                        .addComponent(btPllC)))
+                        .addComponent(btPllC))
+                    .addComponent(btVoltar))
                 .addGap(21, 21, 21))
         );
 
@@ -208,7 +210,8 @@ public class JAdminPll extends javax.swing.JFrame {
     }//GEN-LAST:event_cxPllKeyPressed
 
     private void btPllCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPllCActionPerformed
-        // TODO add your handling code here:
+        cadastrar();
+        compTabela();
     }//GEN-LAST:event_btPllCActionPerformed
     
     private void compTabela(){
@@ -260,6 +263,34 @@ public class JAdminPll extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Deletado com sucesso");
             
             compTabela();
+        }
+    }
+    
+    private void cadastrar(){
+        JTextField cpf = new JTextField(""),
+                   nome = new JTextField(""),
+                   formacao = new JTextField("");
+        Object[] parente = {"CPF", cpf, "Nome", nome, "Formacao", formacao};
+        int opt = 0;
+        Palestrante p = new Palestrante();
+          
+      
+        opt = JOptionPane.showConfirmDialog(null, parente,
+                "Cadastro", JOptionPane.OK_CANCEL_OPTION);
+        
+        try{
+            if(opt == 0){
+                p.setCpf(cpf.getText());
+                p.setNome(nome.getText());
+                p.setFormacao(formacao.getText());
+                plc.inserir(p);
+            }
+        } catch(PalestranteExistenteException pee){
+            JOptionPane.showMessageDialog(null, "Palestrante existente",
+                    "Erro de cadastro", JOptionPane.ERROR_MESSAGE);
+        } catch(IllegalArgumentException iae){
+            JOptionPane.showMessageDialog(null, "CPF Inválido",
+                    "Erro de cadastro", JOptionPane.ERROR_MESSAGE);
         }
     }
     

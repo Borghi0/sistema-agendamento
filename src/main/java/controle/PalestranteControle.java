@@ -3,6 +3,7 @@ package main.java.controle;
 import main.java.objetos.Palestrante;
 import java.util.List;
 import java.util.LinkedList;
+import main.java.exceptions.PalestranteExistenteException;
 
 public class PalestranteControle {
     static PalestranteControle palestranteControleUnic;
@@ -30,10 +31,14 @@ public class PalestranteControle {
         return pll;
     }
     
-    public Palestrante inserir(Palestrante pll){
-        pll = buscarCpf(pll.getCpf());
+    public Palestrante inserir(Palestrante pll) throws PalestranteExistenteException, IllegalArgumentException{
+        String cpf = pll.getCpf();
+        Palestrante correspondente = buscarCpf(cpf);
         
-        if(pll != null) palestrantes.add(pll);
+        if(correspondente == null) 
+            if(MenuControle.validarCPF(cpf)) palestrantes.add(pll);
+            else throw new IllegalArgumentException();
+        else throw new PalestranteExistenteException();
         
         return pll;
     }
