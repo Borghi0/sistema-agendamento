@@ -42,6 +42,7 @@ public class JListaPalestras extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tbPalestras = new javax.swing.JTable();
+        rtInfo = new javax.swing.JLabel();
         barraMenu = new javax.swing.JMenuBar();
         mbOpcoes = new javax.swing.JMenu();
         miVoltar = new javax.swing.JMenuItem();
@@ -90,6 +91,10 @@ public class JListaPalestras extends javax.swing.JFrame {
         tbPalestras.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 18));
         //fim
 
+        rtInfo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        rtInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rtInfo.setText("Clique em uma palestra para mais opções");
+
         mbOpcoes.setText("Opções");
 
         miVoltar.setText("Voltar...");
@@ -110,7 +115,9 @@ public class JListaPalestras extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(81, 81, 81)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 869, Short.MAX_VALUE)
+                    .addComponent(rtInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(81, 81, 81))
         );
         layout.setVerticalGroup(
@@ -118,7 +125,9 @@ public class JListaPalestras extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(60, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(rtInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -304,6 +313,7 @@ public class JListaPalestras extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu mbOpcoes;
     private javax.swing.JMenuItem miVoltar;
+    private javax.swing.JLabel rtInfo;
     private javax.swing.JTable tbPalestras;
     // End of variables declaration//GEN-END:variables
 
