@@ -4,6 +4,7 @@ package main.java.objetos;
 import java.time.LocalTime;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.LinkedList;
 
 
 public class Palestra{
@@ -14,7 +15,9 @@ public class Palestra{
     private LocalTime hora;
     private int vagas;
     private int codigo;
-    private Palestrante pal;
+    
+    private List<Palestrante> palestrantes;
+
     // Construtor
     public Palestra(){
         this.titulo = "";
@@ -22,7 +25,7 @@ public class Palestra{
         this.data = LocalDate.now();
         this.hora = LocalTime.now();
         this.vagas = 0;
-        this.pal = new Palestrante();
+        palestrantes = new LinkedList<>();
     }
     public Palestra(String titulo, String local, LocalDate data, LocalTime hora, int vagas, int codigo, Palestrante pal){
         this.titulo = titulo;
@@ -31,7 +34,7 @@ public class Palestra{
         this.hora = hora;
         this.vagas = vagas;
         this.codigo = codigo;
-        this.pal = pal;
+        palestrantes = new LinkedList<>();
     }
 
     // Getters
@@ -57,10 +60,10 @@ public class Palestra{
     public int getCodigo(){
         return codigo;
     }
-    
-    public Palestrante getPalestrante(){
-        return pal;
+    public List<Palestrante> getPalestrantes(){
+        return palestrantes;
     }
+
     // Setters
     public void setTitulo(String titulo){
         this.titulo = titulo;
