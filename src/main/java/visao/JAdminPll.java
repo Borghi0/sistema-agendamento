@@ -14,7 +14,7 @@ import main.java.controle.PalestranteControle;
 import main.java.exceptions.PalestranteExistenteException;
 import main.java.objetos.Palestrante;
 
-public class JAdminPll extends javax.swing.JFrame {
+public class JAdminPll extends javax.swing.JFrame implements JAdminInterface{
     private static JAdminPll insJAdminPll;
     private PalestranteControle plc;
     private Palestrante pll;
@@ -190,15 +190,17 @@ public class JAdminPll extends javax.swing.JFrame {
     }//GEN-LAST:event_btPllRActionPerformed
 
     private void btPllUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPllUActionPerformed
-        
+        atualizar();
+        compTabela();
     }//GEN-LAST:event_btPllUActionPerformed
 
     private void btPllDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPllDActionPerformed
         deletar();
+        compTabela();
     }//GEN-LAST:event_btPllDActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        
+        voltar();
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void cxPllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxPllActionPerformed
@@ -206,7 +208,7 @@ public class JAdminPll extends javax.swing.JFrame {
     }//GEN-LAST:event_cxPllActionPerformed
 
     private void cxPllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxPllKeyPressed
-       
+       ler(evt);
     }//GEN-LAST:event_cxPllKeyPressed
 
     private void btPllCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPllCActionPerformed
@@ -214,7 +216,8 @@ public class JAdminPll extends javax.swing.JFrame {
         compTabela();
     }//GEN-LAST:event_btPllCActionPerformed
     
-    private void compTabela(){
+    @Override
+    public void compTabela(){
         DefaultTableModel modelo = (DefaultTableModel) tbPll.getModel();
         int linha = 0;
         
@@ -228,7 +231,8 @@ public class JAdminPll extends javax.swing.JFrame {
         }
     }
     
-    private void ler(){
+    @Override
+    public void ler(){
         DefaultTableModel modelo = (DefaultTableModel) tbPll.getModel();
         pll = null;
         
@@ -249,8 +253,15 @@ public class JAdminPll extends javax.swing.JFrame {
         }
     }
     
-    private void deletar(){
+    @Override
+    public void ler(java.awt.event.KeyEvent evt){
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) ler();
+    }
+    
+    @Override
+    public void deletar(){
         boolean check = false;
+        
         pll = plc.buscarCpf(cxPll.getText());
         
         if(pll == null){
@@ -261,9 +272,9 @@ public class JAdminPll extends javax.swing.JFrame {
             
             if(check)
                 JOptionPane.showMessageDialog(null, "Deletado com sucesso");
-            
-            compTabela();
         }
+        
+        cxPll.requestFocus();
     }
     
     private void cadastrar(){
@@ -277,6 +288,13 @@ public class JAdminPll extends javax.swing.JFrame {
       
         opt = JOptionPane.showConfirmDialog(null, parente,
                 "Cadastro", JOptionPane.OK_CANCEL_OPTION);
+        
+        if("".equals(nome.getText())){
+            JOptionPane.showMessageDialog(null, "Nome em branco", 
+                    "Erro de cadastro", JOptionPane.ERROR_MESSAGE);
+            
+            return;
+        }
         
         try{
             if(opt == 0){
@@ -292,6 +310,45 @@ public class JAdminPll extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "CPF Inválido",
                     "Erro de cadastro", JOptionPane.ERROR_MESSAGE);
         }
+        
+        cxPll.requestFocus();
+    }
+    
+    @Override
+    public void atualizar(){
+        String formacao = "";
+        
+        pll = plc.buscarCpf(cxPll.getText());
+        
+        if(pll == null){
+            rtAviso.setVisible(true);
+            tempo.start();
+        } else{
+            formacao = JOptionPane.showInputDialog(null, "Nova formacao: ", 
+                    "Atualizacao cadastral", JOptionPane.QUESTION_MESSAGE);
+            pll.setFormacao(formacao);
+            
+            plc.getPalestrantes().set(plc.getPalestrantes().indexOf(pll), pll);
+        }
+        
+        cxPll.requestFocus();
+    }
+    
+    @Override
+    public void voltar(){
+        JAdmin ja = new JAdmin();
+        int opt = JOptionPane.showConfirmDialog(
+                                                null,
+                                                "Deseja voltar?",
+                                                "Retorno",
+                                                JOptionPane.YES_NO_OPTION);
+        
+        if(opt == 0){
+            this.dispose();
+            ja.setVisible(true);
+        }
+        
+        cxPll.requestFocus();
     }
     
     public static void main(String args[]) {

@@ -13,9 +13,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 
-public class JAdminUsuarios extends javax.swing.JFrame {
+public class JAdminUsuarios extends javax.swing.JFrame implements JAdminInterface{
     UsuarioControle uc = UsuarioControle.getUsuarioControle();
     Usuario u = null;
+    private static JAdminUsuarios insJAdminUsuarios;
     
     ActionListener apagaAviso = new ActionListener(){
         @Override
@@ -27,7 +28,7 @@ public class JAdminUsuarios extends javax.swing.JFrame {
             
     Timer tempo = new Timer(1500, apagaAviso);
     
-    public JAdminUsuarios() {
+    private JAdminUsuarios() {
         initComponents();
         rtAviso.setVisible(false);
         
@@ -35,7 +36,12 @@ public class JAdminUsuarios extends javax.swing.JFrame {
             "41000873811", "arthurhcaron@gmail.com", "PlutPlatZoom16$", 
             "PlutPlatZoom16$", "bobao", false, false);
     }
-
+    
+    public static JAdminUsuarios getJAdminUsuarios(){
+        if(insJAdminUsuarios == null) insJAdminUsuarios = new JAdminUsuarios();
+        
+        return insJAdminUsuarios;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -186,19 +192,15 @@ public class JAdminUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btUserUActionPerformed
 
     private void btUserDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUserDActionPerformed
-        try{
-            deletar();
-        } catch(DelUserAtualException duae){
-            JOptionPane.showMessageDialog(null, "Nao se pode deletar usuario atual",
-                    "Erro delecao de usuario", JOptionPane.ERROR_MESSAGE);
-        }
+        deletar();
     }//GEN-LAST:event_btUserDActionPerformed
 
     private void cxUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cxUserKeyPressed
         ler(evt);
     }//GEN-LAST:event_cxUserKeyPressed
     
-    private void compTabela(){
+    @Override
+    public void compTabela(){
         DefaultTableModel modelo = (DefaultTableModel) tbUsers.getModel();
         int linha = 0;
         
@@ -215,7 +217,8 @@ public class JAdminUsuarios extends javax.swing.JFrame {
         
     }
     
-    private void ler(){
+    @Override
+    public void ler(){
         DefaultTableModel modelo = (DefaultTableModel) tbUsers.getModel();
         u = null;
         
@@ -238,29 +241,33 @@ public class JAdminUsuarios extends javax.swing.JFrame {
         }
     }
     
-    private void ler(java.awt.event.KeyEvent evt){
+    @Override
+    public void ler(java.awt.event.KeyEvent evt){
         if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) ler();
     }
-    private void deletar() throws DelUserAtualException{
+    @Override
+    public void deletar(){
         boolean check = false;
         u = uc.buscarCpf(cxUser.getText());
         
-        if(u == null){ rtAviso.setVisible(true); tempo.start();}
-        else{
-            if(u.equals(MenuControle.getUsuarioAtual()))
-                throw new DelUserAtualException();
+        try{
+            if(u == null){ rtAviso.setVisible(true); tempo.start();}
             else{
                 check = uc.deletar(u);
-                
+
                 if(check)
                     JOptionPane.showMessageDialog(null, "Deletado com sucesso");
-                
+
                 compTabela();
             }
+        } catch(DelUserAtualException duae){
+            JOptionPane.showMessageDialog(null, "Nao se pode deletar usuario atual",
+                    "Erro delecao de usuario", JOptionPane.ERROR_MESSAGE);
         }
     }
     
-    private void atualizar(){
+    @Override
+    public void atualizar(){
         JCheckBox cbAdmin = new JCheckBox("Admin"),
                   cbColab = new JCheckBox("Colaborador");
         String msg = "Atualizar permissoes";
@@ -277,12 +284,15 @@ public class JAdminUsuarios extends javax.swing.JFrame {
             if(opt == 0){
                 u.setAdm_flag(cbAdmin.isSelected());
                 u.setColab_flag(cbColab.isSelected());
+                
+                UsuarioControle.getUsuarios().set(UsuarioControle.getUsuarios().indexOf(u), u);
             }
             
             compTabela();
         }
     }
     
+    @Override
     public void voltar(){
         JAdmin ja = new JAdmin();
         int opt = JOptionPane.showConfirmDialog(
