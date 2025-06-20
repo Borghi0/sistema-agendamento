@@ -88,6 +88,11 @@ public class JCadastro extends javax.swing.JFrame {
         setTitle("Cadastro");
 
         cxNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cxNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cxNomeFocusLost(evt);
+            }
+        });
         cxNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cxNomeActionPerformed(evt);
@@ -104,6 +109,11 @@ public class JCadastro extends javax.swing.JFrame {
         rtCPF.setText("CPF:");
 
         cxCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cxCPF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cxCPFFocusLost(evt);
+            }
+        });
         cxCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cxCPFActionPerformed(evt);
@@ -152,6 +162,11 @@ public class JCadastro extends javax.swing.JFrame {
         rtEmail.setText("Email:");
 
         cxEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cxEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cxEmailFocusLost(evt);
+            }
+        });
         cxEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cxEmailActionPerformed(evt);
@@ -168,6 +183,11 @@ public class JCadastro extends javax.swing.JFrame {
         rtUser.setText("Nome de Usuario:");
 
         cxUser.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cxUser.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cxUserFocusLost(evt);
+            }
+        });
         cxUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cxUserActionPerformed(evt);
@@ -372,6 +392,22 @@ public class JCadastro extends javax.swing.JFrame {
         voltar(evt);
     }//GEN-LAST:event_btVoltarKeyPressed
 
+    private void cxCPFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cxCPFFocusLost
+        cxCPF.setText(cxCPF.getText().replaceAll("[^0-9]", ""));
+    }//GEN-LAST:event_cxCPFFocusLost
+
+    private void cxUserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cxUserFocusLost
+        cxUser.setText(cxUser.getText().replaceAll("\\s+", ""));
+    }//GEN-LAST:event_cxUserFocusLost
+
+    private void cxEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cxEmailFocusLost
+        cxEmail.setText(cxEmail.getText().replaceAll("\\s+", ""));
+    }//GEN-LAST:event_cxEmailFocusLost
+
+    private void cxNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cxNomeFocusLost
+        cxNome.setText(cxNome.getText().trim());
+    }//GEN-LAST:event_cxNomeFocusLost
+
     public void voltar(){
         dispose();
         MenuControle.menuInicial.setVisible(true);
@@ -384,6 +420,11 @@ public class JCadastro extends javax.swing.JFrame {
     }
     
     public void cadTenta(){
+        cxUser.setText(cxUser.getText().replaceAll("\\s+", ""));
+        cxEmail.setText(cxEmail.getText().replaceAll("\\s+", ""));
+        cxNome.setText(cxNome.getText().trim());
+        cxCPF.setText(cxCPF.getText().replaceAll("[^0-9]", ""));
+        
         boolean c = false;
         try{
             UsuarioControle.cadastrar(cxNome.getText(), cxCPF.getText(), cxEmail.getText(),
