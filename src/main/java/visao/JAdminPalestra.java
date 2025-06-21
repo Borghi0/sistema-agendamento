@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
@@ -20,7 +21,6 @@ import main.java.objetos.Palestrante;
 public final class JAdminPalestra extends javax.swing.JFrame implements JAdminInterface {
     private static JAdminPalestra insJAdminPalestra;
     private PalestraControle pc = PalestraControle.getPalestraControle();
-    private Palestra palestrinha = null;
     
     ActionListener apagaAviso = new ActionListener(){
         @Override
@@ -34,8 +34,7 @@ public final class JAdminPalestra extends javax.swing.JFrame implements JAdminIn
     private JAdminPalestra() {
         initComponents();
         rtAviso.setVisible(false);
-        
-        LinkedList<Palestrante> lista = new LinkedList<Palestrante>();
+
         try{
             PalestraControle.cadastrar(
                 "Título", 
@@ -43,7 +42,7 @@ public final class JAdminPalestra extends javax.swing.JFrame implements JAdminIn
                 LocalDate.now(), 
                 LocalTime.now(), 
                 100, 
-                lista
+                null
             );
 
             PalestraControle.cadastrar(
@@ -52,7 +51,7 @@ public final class JAdminPalestra extends javax.swing.JFrame implements JAdminIn
                 LocalDate.of(2025, 7, 15), 
                 LocalTime.of(14, 30), 
                 80, 
-                lista
+                null
             );
         } catch(PalestraConcomitanteException pce){
             
@@ -231,7 +230,8 @@ public final class JAdminPalestra extends javax.swing.JFrame implements JAdminIn
     }// </editor-fold>//GEN-END:initComponents
 
     private void btPalestraCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPalestraCActionPerformed
-        
+        inserir();
+        compTabela();
     }//GEN-LAST:event_btPalestraCActionPerformed
 
     private void btPalestraRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPalestraRActionPerformed
@@ -240,6 +240,7 @@ public final class JAdminPalestra extends javax.swing.JFrame implements JAdminIn
 
     private void btPalestraUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPalestraUActionPerformed
         atualizar();
+        compTabela();
     }//GEN-LAST:event_btPalestraUActionPerformed
 
     private void btPalestraDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPalestraDActionPerformed
@@ -323,9 +324,8 @@ public final class JAdminPalestra extends javax.swing.JFrame implements JAdminIn
 
     @Override
     public void atualizar() {
-        PalestraCU palestraU = null;
-        int opt = 0,
-            codigo = 0;
+        PalestraUC palestraU = null;
+        int codigo = 0;
         Palestra p = null;
         
         try{
@@ -335,33 +335,14 @@ public final class JAdminPalestra extends javax.swing.JFrame implements JAdminIn
             if(p == null){
                 rtAviso.setVisible(true);
                 tempo.start();
-            } else{ 
-                palestraU = new PalestraCU(p);
-                
-                opt = JOptionPane.showConfirmDialog(palestraU, palestraU, 
-                        "Atualizacao", JOptionPane.OK_CANCEL_OPTION);
-                
-                if(opt == 0){
-                    p.setTitulo(palestraU.getCxTitulo().getText());
-                    p.setData(LocalDate.of(
-                        Integer.parseInt(palestraU.getCxAno().getText()),
-                        Integer.parseInt(palestraU.getCxMes().getText()),
-                        Integer.parseInt(palestraU.getCxDia().getText())
-                    ));
-                    p.setHora(LocalTime.of(
-                        Integer.parseInt(palestraU.getCxHora().getText()),
-                        Integer.parseInt(palestraU.getCxMin().getText())
-                    ));
-                    p.setVagas(Integer.parseInt(palestraU.getCxVaga().getText()));
-                    p.setLocal(palestraU.getCxLocal().getText());
-                }
+            } else{
+                palestraU = new PalestraUC(p, 0);
+                palestraU.setVisible(true);
             }
         } catch(NumberFormatException nfe){
             JOptionPane.showMessageDialog(null, "Parametro invalido", "Erro",
                     JOptionPane.ERROR_MESSAGE);
-        } finally{
-            compTabela();
-        }
+        } 
     }
 
     @Override
@@ -388,7 +369,15 @@ public final class JAdminPalestra extends javax.swing.JFrame implements JAdminIn
         }
     }
     
-    public void inscrever(){
+    private void inserir(){
+        PalestraUC palestraU = null;
+        Palestra p = null;
+        
+        palestraU = new PalestraUC(1);
+        palestraU.setVisible(true);
+    }
+    
+    private void inscrever(){
         int codigo = 0;
         Palestra p = null;
         boolean check = false;

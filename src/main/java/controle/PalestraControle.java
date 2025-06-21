@@ -28,7 +28,7 @@ public class PalestraControle {
     }
     
     public static void cadastrar(String titulo, String local, LocalDate data, 
-            LocalTime hora, int vagas, LinkedList<Palestrante> palestrantes) 
+            LocalTime hora, int vagas, Palestrante palestrantes) 
             throws PalestraConcomitanteException{
         
         for(Palestra p : palestras){
@@ -42,7 +42,7 @@ public class PalestraControle {
     
     public static Palestra cadastrar(Palestra p) throws PalestraConcomitanteException{
         cadastrar(p.getTitulo(), p.getLocal(), p.getData(), p.getHora(),
-                p.getVagas(), (LinkedList<Palestrante>) p.getPalestrantes());
+                p.getVagas(), p.getPalestrantes());
         
         return p;
     }
