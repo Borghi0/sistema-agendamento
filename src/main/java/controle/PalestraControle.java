@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
+import main.java.exceptions.PalestraConcomitanteException;
 
 
 public class PalestraControle {
@@ -26,10 +27,47 @@ public class PalestraControle {
         return palestras;
     }
     
-    public static void cadastrar(String titulo, String local, LocalDate data, LocalTime hora, int vagas, LinkedList<Palestrante> palestrantes){
+    public static void cadastrar(String titulo, String local, LocalDate data, 
+            LocalTime hora, int vagas, LinkedList<Palestrante> palestrantes) 
+            throws PalestraConcomitanteException{
+        
+        for(Palestra p : palestras){
+            if(p.getLocal().equals(local) && p.getData().isEqual(data) && p.getHora().compareTo(hora) == 0)
+                throw new PalestraConcomitanteException();
+        }
+        
         palestras.add(new Palestra(titulo, local, data, hora, vagas, getCodUnic(), palestrantes));
         ordenarBd();
     }
+    
+    public static Palestra cadastrar(Palestra p) throws PalestraConcomitanteException{
+        cadastrar(p.getTitulo(), p.getLocal(), p.getData(), p.getHora(),
+                p.getVagas(), (LinkedList<Palestrante>) p.getPalestrantes());
+        
+        return p;
+    }
+    
+    public static boolean deletar(int codigo){
+        Palestra p = buscaCodigo(codigo);
+        boolean retornavel = false;
+        
+        if(p != null){
+            retornavel = true;
+            palestras.remove(p);
+        }
+        
+        return retornavel;
+    }
+    
+    public static Palestra buscaCodigo(int codigo){
+        Palestra retornavel = null;
+        
+        for(Palestra p : palestras)
+            if(p.getCodigo() == codigo) retornavel = p;
+        
+        return retornavel;
+    }
+    
     public static int getCodUnic(){
         ordenarBd();
         

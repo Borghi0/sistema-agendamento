@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import javax.swing.JCheckBox;
 
-public class JAdminUsuarios extends javax.swing.JFrame implements JAdminInterface{
+public final class JAdminUsuarios extends javax.swing.JFrame implements JAdminInterface{
     UsuarioControle uc = UsuarioControle.getUsuarioControle();
     Usuario u = null;
     private static JAdminUsuarios insJAdminUsuarios;
@@ -31,10 +31,7 @@ public class JAdminUsuarios extends javax.swing.JFrame implements JAdminInterfac
     private JAdminUsuarios() {
         initComponents();
         rtAviso.setVisible(false);
-        
-        UsuarioControle.cadastrar("Arthur Henrique Jardim da Cunha Pinto", 
-            "41000873811", "arthurhcaron@gmail.com", "PlutPlatZoom16$", 
-            "PlutPlatZoom16$", "bobao", false, false);
+        compTabela();
     }
     
     public static JAdminUsuarios getJAdminUsuarios(){

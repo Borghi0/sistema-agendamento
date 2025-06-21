@@ -16,7 +16,8 @@ public class Palestra{
     private int vagas;
     private int codigo;
     
-    private List<Palestrante> palestrantes;
+    private Palestrante pal;
+    private List<Usuario> inscritos;
 
     // Construtor
     public Palestra(){
@@ -25,17 +26,16 @@ public class Palestra{
         this.data = LocalDate.now();
         this.hora = LocalTime.now();
         this.vagas = 0;
-        palestrantes = new LinkedList<>();
+        this.pal = new Palestrante();
     }
-    public Palestra(String titulo, String local, LocalDate data, LocalTime hora, int vagas, int codigo, LinkedList<Palestrante> palestrantes){
+    public Palestra(String titulo, String local, LocalDate data, LocalTime hora, int vagas, int codigo, Palestrante pal){
         this.titulo = titulo;
         this.local = local;
         this.data = data;
         this.hora = hora;
         this.vagas = vagas;
         this.codigo = codigo;
-        if(palestrantes!=null) this.palestrantes = palestrantes;
-        else this.palestrantes = new LinkedList<>();
+        this.pal = pal;
     }
 
     // Getters
@@ -61,8 +61,8 @@ public class Palestra{
     public int getCodigo(){
         return codigo;
     }
-    public List<Palestrante> getPalestrantes(){
-        return palestrantes;
+    public Palestrante getPalestrantes(){
+        return pal;
     }
 
     // Setters
@@ -87,5 +87,19 @@ public class Palestra{
     }
     public void setCodigo(int codigo){
         this.codigo = codigo;
+    }
+    
+    public void setPalestrante(Palestrante pal){
+        this.pal = pal;
+    }
+    public boolean novoInscrito(Usuario u){
+        boolean retorno = false;
+        
+        if(!inscritos.contains(u)){
+            inscritos.add(u);
+            retorno = true;
+        }
+        
+        return retorno;
     }
 }

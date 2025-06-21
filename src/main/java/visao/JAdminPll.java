@@ -14,7 +14,7 @@ import main.java.controle.PalestranteControle;
 import main.java.exceptions.PalestranteExistenteException;
 import main.java.objetos.Palestrante;
 
-public class JAdminPll extends javax.swing.JFrame implements JAdminInterface{
+public final class JAdminPll extends javax.swing.JFrame implements JAdminInterface{
     private static JAdminPll insJAdminPll;
     private PalestranteControle plc;
     private Palestrante pll;
