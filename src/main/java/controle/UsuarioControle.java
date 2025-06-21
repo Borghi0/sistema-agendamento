@@ -155,6 +155,7 @@ public class UsuarioControle {
             if(palestra.getVagas()>0){
                 MenuControle.getUsuarioAtual().getPalestras().add(palestra);
                 palestra.setVagas(palestra.getVagas()-1);
+                palestra.novoInscrito(MenuControle.getUsuarioAtual());
             } else throw new IllegalArgumentException("Não há vagas");        
         }
     }
