@@ -95,11 +95,12 @@ public class Palestra{
     public boolean novoInscrito(Usuario u){
         boolean retorno = false;
         
-        if(!inscritos.contains(u)){
-            inscritos.add(u);
-            retorno = true;
+        if(inscritos!=null){
+            if(!inscritos.contains(u)){
+                inscritos.add(u);
+                retorno = true;
+            }
         }
-        
         return retorno;
     }
 }

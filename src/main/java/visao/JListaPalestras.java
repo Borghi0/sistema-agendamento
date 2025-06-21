@@ -199,33 +199,40 @@ public class JListaPalestras extends javax.swing.JFrame {
         }
 
         if(palestraSelec != null){
-            String mensagem = "Título: " + palestraSelec.getTitulo() +
-                              "\nLocal: " + palestraSelec.getLocal() +
-                              "\nData: " + palestraSelec.getData() +
-                              "\nHora: " + palestraSelec.getHora() +
-                              "\nVagas: " + palestraSelec.getVagas();
-            
-            int o = JOptionPane.showOptionDialog(
-                    null, mensagem, "Detalhes da Palestra",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
-                    null, new String[]{"Voltar", "Palestrantes", "Se Inscrever"}, "Voltar"
-            );
-            if(o == 1){
-                JListaPalestrantes.getJListaPalestrantes().setPalestra(true);
-                JListaPalestrantes.getJListaPalestrantes().setPalestraSelec(palestraSelec);
-                JListaPalestrantes.getJListaPalestrantes().setVisible(true);
-                
-                JListaPalestrantes.getJListaPalestrantes().setExtendedState(javax.swing.JFrame.NORMAL);
-                JListaPalestrantes.getJListaPalestrantes().toFront();
-                JListaPalestrantes.getJListaPalestrantes().requestFocus();
-            }
-            else if(o == 2){
-                try {
-                    UsuarioControle.autoInscricao(palestraSelec);
-                } catch(IllegalArgumentException iae){
-                    JOptionPane.showMessageDialog(
-                        null, iae.getMessage(), "Falha na inscrição", JOptionPane.INFORMATION_MESSAGE
+            boolean flag = true;
+            while(flag){
+                String mensagem = "Título: " + palestraSelec.getTitulo() +
+                                  "\nLocal: " + palestraSelec.getLocal() +
+                                  "\nData: " + palestraSelec.getData() +
+                                  "\nHora: " + palestraSelec.getHora() +
+                                  "\nVagas: " + palestraSelec.getVagas();
+
+                int o = JOptionPane.showOptionDialog(
+                        null, mensagem, "Detalhes da Palestra",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
+                        null, new String[]{"Voltar", "Palestrantes", "Se Inscrever"}, "Voltar"
+                );
+                if(o == 1){
+                    if(palestraSelec.getPalestrantes()!=null && !palestraSelec.getPalestrantes().getCpf().isBlank()){
+                        JOptionPane.showMessageDialog(
+                                null, 
+                                "Palestrante: "+palestraSelec.getPalestrantes().getNome()+"\nFormação: "+palestraSelec.getPalestrantes().getFormacao()
+                                        , palestraSelec.getTitulo(), JOptionPane.INFORMATION_MESSAGE
+                        );
+                    }
+                    else JOptionPane.showMessageDialog(
+                            null, "Não há palestrantes nessa palestra", "Atenção!", JOptionPane.WARNING_MESSAGE
                     );
+                }
+                else if(o == 2){
+                    try {
+                        UsuarioControle.autoInscricao(palestraSelec);
+                    } catch(IllegalArgumentException iae){
+                        JOptionPane.showMessageDialog(
+                            null, iae.getMessage(), "Falha na inscrição", JOptionPane.INFORMATION_MESSAGE
+                        );
+                    }
+                    flag = false;
                 }
             }
         }
@@ -247,21 +254,33 @@ public class JListaPalestras extends javax.swing.JFrame {
         }
 
         if(palestraSelec != null){
-            String mensagem = "Título: " + palestraSelec.getTitulo() +
-                              "\nLocal: " + palestraSelec.getLocal() +
-                              "\nData: " + palestraSelec.getData() +
-                              "\nHora: " + palestraSelec.getHora() +
-                              "\nVagas: " + palestraSelec.getVagas();
-            
-            int o = JOptionPane.showOptionDialog(
-                    null, mensagem, "Detalhes da Palestra",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
-                    null, new String[]{"Palestrantes", "Ok"}, "Ok"
-            );
-            if(o == 0){
-                JListaPalestrantes.getJListaPalestrantes().setPalestra(true);
-                JListaPalestrantes.getJListaPalestrantes().setPalestraSelec(palestraSelec);
-                JListaPalestrantes.getJListaPalestrantes().setVisible(true);
+            boolean flag = true;
+            while(flag){
+                flag = false;
+                String mensagem = "Título: " + palestraSelec.getTitulo() +
+                                  "\nLocal: " + palestraSelec.getLocal() +
+                                  "\nData: " + palestraSelec.getData() +
+                                  "\nHora: " + palestraSelec.getHora() +
+                                  "\nVagas: " + palestraSelec.getVagas();
+
+                int o = JOptionPane.showOptionDialog(
+                        null, mensagem, "Detalhes da Palestra",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, 
+                        null, new String[]{"Palestrantes", "Ok"}, "Ok"
+                );
+                if(o == 0){
+                    if(palestraSelec.getPalestrantes()!=null && !palestraSelec.getPalestrantes().getCpf().isBlank()){
+                        JOptionPane.showMessageDialog(
+                                null, 
+                                "Palestrante: "+palestraSelec.getPalestrantes().getNome()+"\nFormação: "+palestraSelec.getPalestrantes().getFormacao()
+                                        , palestraSelec.getTitulo(), JOptionPane.INFORMATION_MESSAGE
+                        );
+                    }
+                    else JOptionPane.showMessageDialog(
+                            null, "Não há palestrantes nessa palestra", "Atenção!", JOptionPane.WARNING_MESSAGE
+                    );        
+                    flag = true;
+                }
             }
         }
     }
