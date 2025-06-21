@@ -26,6 +26,7 @@ public class Main{
             Palestrante p4 = new Palestrante("João Mendes", "444.444.444-44", "Sistemas de Informação");
             Palestrante p5 = new Palestrante("Fernanda Rocha", "555.555.555-55", "Inteligência Artificial");
 
+            /*
             PalestraControle.cadastrar("Inovação Tecnológica", "Auditório 1", LocalDate.of(2025, 6, 15), LocalTime.of(10, 0), 100, new LinkedList<>(List.of(p1)));
             PalestraControle.cadastrar("Futuro da Inteligência Artificial", "Sala 203", LocalDate.of(2025, 6, 16), LocalTime.of(14, 30), 80, new LinkedList<>(List.of(p2)));
             PalestraControle.cadastrar("Cibersegurança em 2025", "Auditório Principal", LocalDate.of(2025, 6, 17), LocalTime.of(9, 0), 120, new LinkedList<>(List.of(p3)));
@@ -46,7 +47,7 @@ public class Main{
             PalestraControle.cadastrar("Carreiras em Tecnologia", "Sala 103", LocalDate.of(2025, 7, 2), LocalTime.of(14, 0), 85, new LinkedList<>(List.of(p1, p2)));
             PalestraControle.cadastrar("Computação Quântica", "Auditório 2", LocalDate.of(2025, 7, 3), LocalTime.of(16, 30), 100, new LinkedList<>(List.of(p5)));
             PalestraControle.cadastrar("Empreendedorismo Tech", "Sala Azul", LocalDate.of(2025, 7, 4), LocalTime.of(11, 30), 95, new LinkedList<>(List.of(p2, p4)));
-
+            
             // sem palestrantes
             PalestraControle.cadastrar("Tecnologia no Agronegócio", "Sala 210", LocalDate.of(2025, 7, 5), LocalTime.of(9, 0), 70, null);
             PalestraControle.cadastrar("Educação Digital nas Escolas", "Sala 201", LocalDate.of(2025, 7, 6), LocalTime.of(14, 30), 80, null);
@@ -56,7 +57,7 @@ public class Main{
             PalestraControle.cadastrar("Impressão 3D e Suas Aplicações", "Laboratório 1", LocalDate.of(2025, 7, 10), LocalTime.of(15, 30), 50, null);
             PalestraControle.cadastrar("Jogos Digitais e Educação", "Sala 406", LocalDate.of(2025, 7, 11), LocalTime.of(16, 0), 75, null);
             PalestraControle.cadastrar("Tecnologia Assistiva", "Sala 109", LocalDate.of(2025, 7, 12), LocalTime.of(10, 30), 65, null);
-        
+            */
         // </editor-fold>
         
         
