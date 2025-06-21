@@ -201,6 +201,7 @@ public class JListaPalestras extends javax.swing.JFrame {
         if(palestraSelec != null){
             boolean flag = true;
             while(flag){
+                flag = false;
                 String mensagem = "Título: " + palestraSelec.getTitulo() +
                                   "\nLocal: " + palestraSelec.getLocal() +
                                   "\nData: " + palestraSelec.getData() +
@@ -223,6 +224,7 @@ public class JListaPalestras extends javax.swing.JFrame {
                     else JOptionPane.showMessageDialog(
                             null, "Não há palestrantes nessa palestra", "Atenção!", JOptionPane.WARNING_MESSAGE
                     );
+                    flag = true;
                 }
                 else if(o == 2){
                     try {
@@ -232,7 +234,6 @@ public class JListaPalestras extends javax.swing.JFrame {
                             null, iae.getMessage(), "Falha na inscrição", JOptionPane.INFORMATION_MESSAGE
                         );
                     }
-                    flag = false;
                 }
             }
         }
