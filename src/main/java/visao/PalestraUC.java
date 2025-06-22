@@ -51,7 +51,7 @@ public class PalestraUC extends javax.swing.JFrame {
         modelo.addElement(null);
         
         for(Palestrante p1 : pc.getPalestrantes())
-            modelo.addElement(p1.getNome());
+            modelo.addElement(p1);
         
         cxTitulo.setText(palestrinha.getTitulo());
         cxDia.setText(Integer.toString(palestrinha.getData().getDayOfMonth()));
@@ -60,7 +60,8 @@ public class PalestraUC extends javax.swing.JFrame {
         cxHora.setText(Integer.toString(palestrinha.getHora().getHour()));
         cxMin.setText(Integer.toString(palestrinha.getHora().getMinute()));
         cxVaga.setText(Integer.toString(palestrinha.getVagas()));
-        cmbPalestrante.setSelectedItem(null);
+        cmbPalestrante.setSelectedItem(palestrinha.getPalestrantes());
+        cxLocal.setText(palestrinha.getLocal());
         
         this.flag = flag;
         this.palestrinha = palestrinha;
@@ -228,13 +229,17 @@ public class PalestraUC extends javax.swing.JFrame {
     }//GEN-LAST:event_btOk5ActionPerformed
     
     private void botao(){
-        try{
-            Palestrante pp = null;
+        if(flag == 0) atualizar();
+        else cadastrar();
+    }
+    
+    private void atualizar(){
+        Palestrante pp = null;
+        Palestra aux = new Palestra();
+
+        aux.setTitulo(cxTitulo.getText());
         
-            Palestra aux = new Palestra();
-
-            aux.setTitulo(cxTitulo.getText());
-
+        try{
             aux.setData(LocalDate.of(
                 Integer.parseInt(cxAno.getText()),
                 Integer.parseInt(cxMes.getText()),
@@ -251,26 +256,34 @@ public class PalestraUC extends javax.swing.JFrame {
             aux.setLocal(cxLocal.getText());
 
             for(Palestrante pal : pc.getPalestrantes())
-                if(pal.getNome().equals((String) cmbPalestrante.getSelectedItem()))
+                if(pal.equals(cmbPalestrante.getSelectedItem()))
                     pp = pal;
 
             aux.setPalestrante(pp);
+            int codigo = PalestraControle.getPalestras().indexOf(palestrinha);
+            Palestra teste = PalestraControle.atualizar(codigo, aux);
 
-            if(flag == 0) PalestraControle.deletar(palestrinha.getCodigo());
-            
-            try{
-                PalestraControle.cadastrar(aux);
-            } catch(PalestraConcomitanteException pce){
-                JOptionPane.showMessageDialog(null, 
-                        "Nao pode haver 2 palestras simultaneas no mesmo local", 
-                        "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+            if(teste == null)
+                JOptionPane.showMessageDialog(null, "Nao foi possivel atualizar",
+                        "Erro de atualizacao", JOptionPane.ERROR_MESSAGE);
+            else
+                JOptionPane.showMessageDialog(null, "Atualizado com sucesso",
+                        "Atualizacao", JOptionPane.INFORMATION_MESSAGE);
         } catch(NumberFormatException nfe){
-            JOptionPane.showMessageDialog(null, "Parametro invalido", "Erro",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Paramentro invalido",
+                    "Erro de atualizacao", JOptionPane.ERROR_MESSAGE);
         }
     }
     
+    private void cadastrar(){
+        try{
+            PalestraControle.cadastrar(palestrinha);
+        } catch(PalestraConcomitanteException pce){
+            JOptionPane.showMessageDialog(null, 
+                    "Nao pode haver duas palestras simultaneas no mesmo local",
+                    "Erro de cadastro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
