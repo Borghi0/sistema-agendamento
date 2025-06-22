@@ -96,7 +96,9 @@ public class JListaPalestras extends javax.swing.JFrame {
         rtInfo.setText("Clique em uma palestra para mais opções");
 
         mbOpcoes.setText("Opções");
+        mbOpcoes.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
 
+        miVoltar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         miVoltar.setText("Voltar...");
         miVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,11 +125,11 @@ public class JListaPalestras extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(rtInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();

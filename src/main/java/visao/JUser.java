@@ -39,7 +39,7 @@ public class JUser extends javax.swing.JFrame {
         rtBemVindoMSG.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         mOpcoes.setText("Opções");
-        mOpcoes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mOpcoes.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
 
         miPalestras.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         miPalestras.setText("Palestras...");
@@ -84,9 +84,9 @@ public class JUser extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(175, Short.MAX_VALUE)
+                .addContainerGap(170, Short.MAX_VALUE)
                 .addComponent(rtBemVindoMSG, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         pack();
@@ -103,7 +103,7 @@ public class JUser extends javax.swing.JFrame {
     }//GEN-LAST:event_miPalestrasActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        rtBemVindoMSG.setText("Bem Vindo "+MenuControle.getUsuarioAtual().getNome()+"!");
+        rtBemVindoMSG.setText("Bem Vindo(a) "+MenuControle.getUsuarioAtual().getNome()+"!");
     }//GEN-LAST:event_formWindowActivated
 
     private void miInscricoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miInscricoesActionPerformed

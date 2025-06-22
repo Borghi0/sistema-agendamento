@@ -116,7 +116,9 @@ public final class JInicial extends javax.swing.JFrame {
         rtErro.setText("usuário ou senha incorretos");
 
         mnOpcoes.setText("Opções");
+        mnOpcoes.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
 
+        mniCad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniCad.setText("Cadastrar-se...");
         mniCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +127,7 @@ public final class JInicial extends javax.swing.JFrame {
         });
         mnOpcoes.add(mniCad);
 
+        mniSair.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         mniSair.setText("Fechar aplicação");
         mniSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,7 +165,7 @@ public final class JInicial extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(164, Short.MAX_VALUE)
+                .addContainerGap(159, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cxUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -176,7 +179,7 @@ public final class JInicial extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btCad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
 
         pack();
