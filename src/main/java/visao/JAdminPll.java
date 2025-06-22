@@ -34,6 +34,7 @@ public final class JAdminPll extends javax.swing.JFrame implements JAdminInterfa
         pll = null;
         
         initComponents();
+        setLocationRelativeTo(null); // Inicia a janela centralizada
         compTabela();
         rtAviso.setVisible(false);
     }
@@ -59,7 +60,7 @@ public final class JAdminPll extends javax.swing.JFrame implements JAdminInterfa
         rtAviso = new javax.swing.JLabel();
         btPllC = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tbPll.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,7 +159,7 @@ public final class JAdminPll extends javax.swing.JFrame implements JAdminInterfa
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(

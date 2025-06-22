@@ -30,6 +30,7 @@ public final class JAdminUsuarios extends javax.swing.JFrame implements JAdminIn
     
     private JAdminUsuarios() {
         initComponents();
+        setLocationRelativeTo(null); // Inicia a janela centralizada
         rtAviso.setVisible(false);
         compTabela();
     }
