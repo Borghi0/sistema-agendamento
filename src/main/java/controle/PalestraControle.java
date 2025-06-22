@@ -59,6 +59,19 @@ public class PalestraControle {
         return retornavel;
     }
     
+    public static Palestra atualizar(int codigo, Palestra nova){
+        Palestra retorno = null;
+        
+        for(Palestra plt : palestras)
+            if(plt.getCodigo() == nova.getCodigo()) retorno = plt;
+        
+        try{
+            palestras.set(codigo, retorno);
+        } catch(ArrayIndexOutOfBoundsException aioobe){}
+        
+        return retorno;
+    }
+    
     public static Palestra buscaCodigo(int codigo){
         Palestra retornavel = null;
         
