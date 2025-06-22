@@ -348,7 +348,6 @@ public class JListaPalestras extends javax.swing.JFrame {
     }
     
     
-    // coloque as flags novas aqui
     public void setFlags(boolean b){
         this.completo = b;
         this.inscritas = b;

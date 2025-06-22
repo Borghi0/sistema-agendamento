@@ -7,11 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 import main.java.exceptions.DelUserAtualException;
 
+
 public class UsuarioControle {
     private static final List<Usuario> usuarios = new LinkedList<>();
     private static UsuarioControle usuarioControleUnic;
-    
-   
+       
     
     private UsuarioControle(){}
   
