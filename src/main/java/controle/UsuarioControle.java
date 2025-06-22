@@ -36,6 +36,9 @@ public class UsuarioControle {
         if (!Verificacao.validarCPF(cpf)) {
             throw new IllegalArgumentException("CPF inválido");
         }
+        if(buscarCpf(cpf)!=null){
+            throw new IllegalArgumentException("CPF em uso");
+        }
         
         if (!Verificacao.validarEmail(email)) {
             throw new IllegalArgumentException("Email inválido");
@@ -63,10 +66,7 @@ public class UsuarioControle {
         }
         if (existe == 3) {
             throw new IllegalArgumentException("UserEmail");
-        }
-        if(buscarCpf(cpf)!=null){
-            throw new IllegalArgumentException("cpf");
-        }
+        }        
         
         usuarios.add(new Usuario(nome, cpf, email, senha, user, adm_flag, colab_flag));
     }
