@@ -1,5 +1,8 @@
 package main.java.visao;
+
+import main.java.controle.MenuControle;
 import javax.swing.JOptionPane;
+
 
 public class JAdmin extends javax.swing.JFrame {
 
@@ -8,6 +11,7 @@ public class JAdmin extends javax.swing.JFrame {
      */
     public JAdmin() {
         initComponents();
+        setLocationRelativeTo(null); // Inicia a janela centralizada
     }
 
     /**
@@ -106,7 +110,11 @@ public class JAdmin extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION
                 );
         
-        if(opt == 0) dispose();
+        if(opt == 0){
+            dispose();
+            MenuControle.setUsuarioAtual(null);
+            MenuControle.menuInicial.setVisible(true);
+        }
     }//GEN-LAST:event_btSairActionPerformed
 
     private void btGerUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGerUserActionPerformed

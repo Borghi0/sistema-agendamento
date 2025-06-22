@@ -33,6 +33,7 @@ public final class JAdminPalestra extends javax.swing.JFrame implements JAdminIn
     Timer tempo = new Timer(1500, apagaAviso);
     private JAdminPalestra() {
         initComponents();
+        setLocationRelativeTo(null); // Inicia a janela centralizada
         rtAviso.setVisible(false);
 
         try{
