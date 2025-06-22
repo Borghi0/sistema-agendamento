@@ -3,19 +3,16 @@ package main.java;
 
 import main.java.controle .*; //importa todas as classes de controle/
 import main.java.objetos .*; // importa todas as classes de objetos/
-import main.java.visao .*;   // importa todas as classes de visao/
 import main.java.exceptions.*;
 
 import java.time.LocalTime;
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
 
 
 public class Main{
     
     public static void main(String args[]){
-        //Leitura ler = Leitura.geraLeitura();
+        
         UsuarioControle.getUsuarios().add(new Usuario("administrador", "0", "admin@", "adminSenha", "admin", true, false));
         
         // <editor-fold defaultstate="collapsed" desc="Cadastros para testes">

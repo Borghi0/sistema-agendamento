@@ -4,6 +4,7 @@ package main.java.objetos;
 import java.util.LinkedList;
 import java.util.List;
 
+
 public class Usuario extends Pessoa{
     // atributos
     private String email;

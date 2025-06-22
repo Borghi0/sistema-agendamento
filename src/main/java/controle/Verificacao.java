@@ -2,9 +2,10 @@ package main.java.controle;
 
 import java.util.regex.Pattern;
 
+
 public abstract class Verificacao {
         
-     // Padrões regex para validação
+    // Padrões regex para validação
     private static final Pattern EMAIL_PATTERN = Pattern.compile(
         "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
     private static final Pattern USERNAME_PATTERN = Pattern.compile(
