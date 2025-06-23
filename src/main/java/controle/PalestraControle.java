@@ -63,11 +63,15 @@ public class PalestraControle {
         Palestra retorno = null;
         
         for(Palestra plt : palestras)
-            if(plt.getCodigo() == nova.getCodigo()) retorno = plt;
+            if(plt.getCodigo() == codigo) retorno = plt;
         
-        try{
-            palestras.set(codigo, retorno);
-        } catch(ArrayIndexOutOfBoundsException aioobe){}
+        if(retorno!=null){
+            retorno.setData(nova.getData());
+            retorno.setLocal(nova.getLocal());
+            retorno.setHora(nova.getHora());
+            retorno.setTitulo(nova.getTitulo());
+            retorno.setVagas(nova.getVagas());
+        }
         
         return retorno;
     }

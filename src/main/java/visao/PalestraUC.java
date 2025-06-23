@@ -260,8 +260,8 @@ public class PalestraUC extends javax.swing.JFrame {
                     pp = pal;
 
             aux.setPalestrante(pp);
-            int codigo = PalestraControle.getPalestras().indexOf(palestrinha);
-            Palestra teste = PalestraControle.atualizar(codigo, aux);
+            
+            Palestra teste = PalestraControle.atualizar(palestrinha.getCodigo(), aux);
 
             if(teste == null)
                 JOptionPane.showMessageDialog(null, "Nao foi possivel atualizar",
