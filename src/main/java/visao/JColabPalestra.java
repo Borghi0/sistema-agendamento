@@ -229,17 +229,20 @@ public class JColabPalestra extends javax.swing.JFrame {
         
         int linhaEscolhida = tabPalestras.getSelectedRow();
         
-       Object pegaCodigo = tabModelo.getValueAt(linhaEscolhida,4);
-       int codEscolhido = (int) pegaCodigo;
+        if(linhaEscolhida == -1){
+            mostraErro("Nenhuma Palestra foi Selecionada!");
+        }else{
+            Object pegaCodigo = tabModelo.getValueAt(linhaEscolhida,4);
+            int codEscolhido = (int) pegaCodigo;
         
                 
-        for(Palestra plt : PalestraControle.getPalestras()){
-            if (plt.getCodigo() == codEscolhido) {
-                pltSelecionada = plt;
-                break;
+            for(Palestra plt : PalestraControle.getPalestras()){
+                if (plt.getCodigo() == codEscolhido) {
+                    pltSelecionada = plt;
+                    break;
+                }
             }
         }
-        
         if(pltSelecionada != null){
             int resp = JOptionPane.showConfirmDialog(
                     null, 
@@ -261,15 +264,19 @@ public class JColabPalestra extends javax.swing.JFrame {
         DefaultTableModel tabModelo = (DefaultTableModel) tabPalestras.getModel();
         
         int linhaEscolhida = tabPalestras.getSelectedRow();
-        
-        Object pegaCodigo = tabModelo.getValueAt(linhaEscolhida,4);
-       int codEscolhido = (int) pegaCodigo;
+       
+        if(linhaEscolhida == -1){
+            mostraErro("Nenhuma linha foi selecionada!");
+        }else{
+            Object pegaCodigo = tabModelo.getValueAt(linhaEscolhida,4);
+            int codEscolhido = (int) pegaCodigo;
         
                 
-        for(Palestra plt : PalestraControle.getPalestras()){
-            if (plt.getCodigo() == codEscolhido) {
-                pltInscrita = plt;
-                break;
+            for(Palestra plt : PalestraControle.getPalestras()){
+                if (plt.getCodigo() == codEscolhido) {
+                    pltInscrita = plt;
+                    break;
+                }
             }
         }
         
@@ -292,6 +299,14 @@ public class JColabPalestra extends javax.swing.JFrame {
                 }
             }
         }
+    }
+    
+    public void mostraErro(String msg){
+        JOptionPane.showMessageDialog(
+                        null, 
+                        msg, 
+                        "ERRO", 
+                        JOptionPane.ERROR_MESSAGE);
     }
     
     public static void main(String args[]) {
