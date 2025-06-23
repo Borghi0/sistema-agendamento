@@ -224,52 +224,54 @@ public class JColabPalestra extends javax.swing.JFrame {
         }
     }
     public void verPalestrante(){
-        Palestra pltSelecionada = null;
-        DefaultTableModel tabModelo = (DefaultTableModel) tabPalestras.getModel();
         
-        int linhaEscolhida = tabPalestras.getSelectedRow();
-        
-        if(linhaEscolhida == -1){
-            mostraErro("Nenhuma Palestra foi Selecionada!");
-        }else{
-            Object pegaCodigo = tabModelo.getValueAt(linhaEscolhida,4);
-            int codEscolhido = (int) pegaCodigo;
-        
-                
+            Palestra pltSelecionada = null;
+            DefaultTableModel tabModelo = (DefaultTableModel) tabPalestras.getModel();
+            
+        try{
+            int linhaEscolhida = tabPalestras.getSelectedRow();
+
+           Object pegaCodigo = tabModelo.getValueAt(linhaEscolhida,4);
+           int codEscolhido = (int) pegaCodigo;
+
+
             for(Palestra plt : PalestraControle.getPalestras()){
                 if (plt.getCodigo() == codEscolhido) {
                     pltSelecionada = plt;
                     break;
                 }
             }
-        }
-        if(pltSelecionada != null){
-            int resp = JOptionPane.showConfirmDialog(
-                    null, 
-                    "Quer ver os palestrantes dessa palestra?",
-                    "VER PALESTRANTES",
-                    JOptionPane.YES_NO_OPTION);
-            
-            
-            if(resp == 0){
-                    JColabVerPalestrante verPalestrante = JColabVerPalestrante.geraColabVerPalestrante();
-                    verPalestrante.passarPalestra(pltSelecionada);
-                    verPalestrante.setVisible(true);
-                    dispose();
+
+            if(pltSelecionada != null){
+                int resp = JOptionPane.showConfirmDialog(
+                        null, 
+                        "Quer ver os palestrantes dessa palestra?",
+                        "VER PALESTRANTES",
+                        JOptionPane.YES_NO_OPTION);
+
+
+                if(resp == 0){
+                        JColabVerPalestrante verPalestrante = JColabVerPalestrante.geraColabVerPalestrante();
+                        verPalestrante.passarPalestra(pltSelecionada);
+                        verPalestrante.setVisible(true);
+                        dispose();
+                }
             }
+        } catch(NullPointerException npe){
+            JOptionPane.showMessageDialog(null, "Sem palestrantes", 
+                    "Palestrantes", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     public void inscrever(){
         Palestra pltInscrita = null;
         DefaultTableModel tabModelo = (DefaultTableModel) tabPalestras.getModel();
         
-        int linhaEscolhida = tabPalestras.getSelectedRow();
+       try{
+           int linhaEscolhida = tabPalestras.getSelectedRow();
        
-        if(linhaEscolhida == -1){
-            mostraErro("Nenhuma linha foi selecionada!");
-        }else{
-            Object pegaCodigo = tabModelo.getValueAt(linhaEscolhida,4);
-            int codEscolhido = (int) pegaCodigo;
+        
+       Object pegaCodigo = tabModelo.getValueAt(linhaEscolhida,4);
+       int codEscolhido = (int) pegaCodigo;
         
                 
             for(Palestra plt : PalestraControle.getPalestras()){
@@ -299,6 +301,10 @@ public class JColabPalestra extends javax.swing.JFrame {
                 }
             }
         }
+       } catch(NullPointerException npe){
+           JOptionPane.showMessageDialog(null, "Invalido", 
+                   "Erro", JOptionPane.ERROR_MESSAGE);
+       }
     }
     
     public void mostraErro(String msg){
