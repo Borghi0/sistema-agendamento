@@ -250,10 +250,10 @@ public class JColabCriarPalestra extends javax.swing.JFrame {
             palestrante.setNome(cxPalestrante.getText());
             palestrante.setFormacao(cxPalTitulo.getText());
             palestrante.setCpf(cxPalCpf.getText());
-            int vagas = Integer.parseInt(cxVagas.getText());
             
             
             try{
+                int vagas = Integer.parseInt(cxVagas.getText());
                 bdPalestra.cadastrar(
                         cxTitulo.getText(),
                         cxLocal.getText(),
@@ -273,6 +273,12 @@ public class JColabCriarPalestra extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(
                         null, 
                         "Local e Horario ja reservados", 
+                        "ERRO DE CADASTRO", 
+                        JOptionPane.ERROR_MESSAGE);
+            } catch(NumberFormatException nfe){
+                JOptionPane.showMessageDialog(
+                        null, 
+                        "Vagas apresenta erro", 
                         "ERRO DE CADASTRO", 
                         JOptionPane.ERROR_MESSAGE);
             }

@@ -13,17 +13,17 @@ public class Main{
     
     public static void main(String args[]){        
         UsuarioControle.getUsuarios().add(new Usuario("administrador", "0", "admin@", "adminSenha", "admin", true, false));
-
+        PalestranteControle pc = PalestranteControle.getPalestranteControle();
         
         // <editor-fold defaultstate="collapsed" desc="Cadastros para testes">
         
             UsuarioControle.getUsuarios().add(new Usuario("testeeeeeeeeeeeeeeeeeeeeeeeeeeee32131", "0", "amigo@", "amigos", "amigo", false, false));
 
-            try{Palestrante p1 = new Palestrante("Ana Silva", "111.111.111-11", "Engenharia da Computação");
-            Palestrante p2 = new Palestrante("Carlos Souza", "222.222.222-22", "Ciência da Computação");
-            Palestrante p3 = new Palestrante("Mariana Lima", "333.333.333-33", "Segurança da Informação");
-            Palestrante p4 = new Palestrante("João Mendes", "444.444.444-44", "Sistemas de Informação");
-            Palestrante p5 = new Palestrante("Fernanda Rocha", "555.555.555-55", "Inteligência Artificial");
+            try{Palestrante p1 = new Palestrante("Ana Silva", "63472448024", "Engenharia da Computação");
+            Palestrante p2 = new Palestrante("Carlos Souza", "76547723003", "Ciência da Computação");
+            Palestrante p3 = new Palestrante("Mariana Lima", "00458925047", "Segurança da Informação");
+            Palestrante p4 = new Palestrante("João Mendes", "38274038045", "Sistemas de Informação");
+            Palestrante p5 = new Palestrante("Fernanda Rocha", "92575726093", "Inteligência Artificial");
 
             PalestraControle.cadastrar("Inovação Tecnológica", "Auditório 1", LocalDate.of(2025, 6, 15), LocalTime.of(10, 0), 100, p1);
             PalestraControle.cadastrar("Futuro da Inteligência Artificial", "Sala 203", LocalDate.of(2025, 6, 16), LocalTime.of(14, 30), 80, p2);
@@ -55,7 +55,14 @@ public class Main{
             PalestraControle.cadastrar("Impressão 3D e Suas Aplicações", "Laboratório 1", LocalDate.of(2025, 7, 10), LocalTime.of(15, 30), 50, null);
             PalestraControle.cadastrar("Jogos Digitais e Educação", "Sala 406", LocalDate.of(2025, 7, 11), LocalTime.of(16, 0), 75, null);
             PalestraControle.cadastrar("Tecnologia Assistiva", "Sala 109", LocalDate.of(2025, 7, 12), LocalTime.of(10, 30), 65, null);
+            
+            pc.inserir(p1);
+            pc.inserir(p5);
+            pc.inserir(p2);
+            pc.inserir(p3);
+            pc.inserir(p4);
             }catch(PalestraConcomitanteException pce){}
+            catch(PalestranteExistenteException pee){}
         // </editor-fold>
         
         

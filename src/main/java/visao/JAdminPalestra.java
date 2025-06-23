@@ -112,6 +112,11 @@ public final class JAdminPalestra extends javax.swing.JFrame implements JAdminIn
                 "Codigo", "Titulo", "Local", "Data", "Hora"
             }
         ));
+        tbPalestras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPalestrasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbPalestras);
 
         btPalestraR.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
@@ -210,7 +215,7 @@ public final class JAdminPalestra extends javax.swing.JFrame implements JAdminIn
                     .addComponent(rtAviso))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btPalestraC)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -262,7 +267,12 @@ public final class JAdminPalestra extends javax.swing.JFrame implements JAdminIn
 
     private void btInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInsActionPerformed
         inscrever();
+        compTabela();
     }//GEN-LAST:event_btInsActionPerformed
+
+    private void tbPalestrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPalestrasMouseClicked
+        verPalestrantes();
+    }//GEN-LAST:event_tbPalestrasMouseClicked
 
     @Override
     public void voltar() {
@@ -322,7 +332,27 @@ public final class JAdminPalestra extends javax.swing.JFrame implements JAdminIn
     public void ler(KeyEvent evt) {
         if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) ler();
     }
-
+    
+    private void verPalestrantes(){
+        int codigo = tbPalestras.getSelectedRow(),
+            palestra = (int) tbPalestras.getValueAt(codigo, 0);
+        String nome = "",
+               formacao = "";
+        Palestra pp = null;
+        
+        for(Palestra p1 : PalestraControle.getPalestras())
+            if(p1.getCodigo() == palestra) pp = p1;
+        
+        try{
+            nome = "Nome: " + pp.getPalestrantes().getNome();
+            formacao = "Formacao: " + pp.getPalestrantes().getFormacao();
+            
+            JOptionPane.showMessageDialog(null, new Object[]{nome, formacao},
+                "Palestrantes", JOptionPane.INFORMATION_MESSAGE);
+        } catch(NullPointerException npe){
+            JOptionPane.showMessageDialog(null, "Palestra sem palestrantes");
+        }
+    }
     @Override
     public void atualizar() {
         PalestraUC palestraU = null;
