@@ -125,7 +125,10 @@ public class JAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_btGerUserActionPerformed
 
     private void btGerPlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGerPlActionPerformed
-        // TODO add your handling code here:
+        JAdminPalestra jap = JAdminPalestra.getJAdminPalestra();
+        
+        this.dispose();
+        jap.setVisible(true);
     }//GEN-LAST:event_btGerPlActionPerformed
 
     private void btGerPllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGerPllActionPerformed
