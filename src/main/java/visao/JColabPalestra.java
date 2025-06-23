@@ -274,10 +274,11 @@ public class JColabPalestra extends javax.swing.JFrame {
        int codEscolhido = (int) pegaCodigo;
         
                 
-        for(Palestra plt : PalestraControle.getPalestras()){
-            if (plt.getCodigo() == codEscolhido) {
-                pltInscrita = plt;
-                break;
+            for(Palestra plt : PalestraControle.getPalestras()){
+                if (plt.getCodigo() == codEscolhido) {
+                    pltInscrita = plt;
+                    break;
+                }
             }
         }
         
@@ -304,6 +305,14 @@ public class JColabPalestra extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "Invalido", 
                    "Erro", JOptionPane.ERROR_MESSAGE);
        }
+    }
+    
+    public void mostraErro(String msg){
+        JOptionPane.showMessageDialog(
+                        null, 
+                        msg, 
+                        "ERRO", 
+                        JOptionPane.ERROR_MESSAGE);
     }
     
     public static void main(String args[]) {
