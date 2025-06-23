@@ -12,27 +12,33 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.swing.JOptionPane;
 
 import main.java.controle.MenuControle;
+import main.java.exceptions.PalestraConcomitanteException;
 /**
  *
  * @author gp51f
  */
 public class JColabCriarPalestra extends javax.swing.JFrame {
 
+    private static JColabCriarPalestra criarPalestraUnic;
     private final PalestraControle bdPalestra = new PalestraControle();
     DateTimeFormatter formataTime = DateTimeFormatter.ofPattern("HH:mm");
     DateTimeFormatter formataData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     
-    public JColabCriarPalestra() {
+    private JColabCriarPalestra() {
         initComponents();
         setLocationRelativeTo(null);
     }
     
+    public static JColabCriarPalestra geraCriarPalestra(){
+        if(criarPalestraUnic == null){
+            criarPalestraUnic = new JColabCriarPalestra();
+        }
+        return criarPalestraUnic;
+    
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -209,16 +215,7 @@ public class JColabCriarPalestra extends javax.swing.JFrame {
 
     
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        int resp = JOptionPane.showConfirmDialog(
-                null,
-                "Deseja realmente voltar?",
-                "VOLTAR",
-                JOptionPane.YES_NO_OPTION);
-        
-        if(resp == 0){
-            dispose();
-            MenuControle.menuColab.setVisible(true);
-        }
+        voltar();
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void btCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCriarActionPerformed
@@ -229,6 +226,18 @@ public class JColabCriarPalestra extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cxVagasActionPerformed
 
+    public void voltar(){
+        int resp = JOptionPane.showConfirmDialog(
+                null,
+                "Deseja realmente voltar?",
+                "VOLTAR",
+                JOptionPane.YES_NO_OPTION);
+        
+        if(resp == 0){
+            dispose();
+            MenuControle.menuColab.setVisible(true);
+        }
+    }
     public void criarPalestra(){
         int option = JOptionPane.showConfirmDialog(
                 null,
@@ -237,10 +246,13 @@ public class JColabCriarPalestra extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION);
         
         if(option == 0){
-            LinkedList<Palestrante> palestrantes = new LinkedList<>();
-            palestrantes.add(0, new Palestrante(cxPalestrante.getText(),cxPalCpf.getText(),cxPalTitulo.getText()));
+            Palestrante palestrante = new Palestrante();
+            palestrante.setNome(cxPalestrante.getText());
+            palestrante.setFormacao(cxPalTitulo.getText());
+            palestrante.setCpf(cxPalCpf.getText());
             int vagas = Integer.parseInt(cxVagas.getText());
-            //falta colocar catch PalestraComitanteException
+            
+            
             try{
                 bdPalestra.cadastrar(
                         cxTitulo.getText(),
@@ -248,12 +260,19 @@ public class JColabCriarPalestra extends javax.swing.JFrame {
                         LocalDate.parse(cxData.getText(),formataData),
                         LocalTime.parse(cxHora.getText(),formataTime),
                         vagas,
-                        palestrantes);
+                        palestrante);
             }
             catch(DateTimeParseException dtpe){
                 JOptionPane.showMessageDialog(
                         null, 
                         "Data ou Horario apresentam erro", 
+                        "ERRO DE CADASTRO", 
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            catch(PalestraConcomitanteException pce){
+                JOptionPane.showMessageDialog(
+                        null, 
+                        "Local e Horario ja reservados", 
                         "ERRO DE CADASTRO", 
                         JOptionPane.ERROR_MESSAGE);
             }

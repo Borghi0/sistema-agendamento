@@ -102,11 +102,9 @@ public class JColabVerPalestrante extends javax.swing.JFrame {
         int linha = 0;
         
         tabmodelo.setRowCount(linha);
+
+        tabmodelo.insertRow(linha, new Object []{p.getPalestrantes().getNome(), p.getPalestrantes().getFormacao()});
         
-        for( Palestrante responsavel : p.getPalestrantes()){
-            tabmodelo.insertRow(linha, new Object []{responsavel.getNome(), responsavel.getFormacao()});
-            linha++;
-        }
     }
     
     public void voltar(){

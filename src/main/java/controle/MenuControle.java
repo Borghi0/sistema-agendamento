@@ -10,7 +10,7 @@ public abstract class MenuControle {
     public static JInicial menuInicial = new JInicial();
     public static JCadastro menuCadastro = new JCadastro();
     private static JAdmin menuAdmin = new JAdmin();
-    //private static JColab menuColab = new JColab();
+    public static JColaborador menuColab = new JColaborador();
     private static JUser menuUser = new JUser();
 
     public static boolean entrar(String userEmail, char[] senha){
@@ -26,7 +26,7 @@ public abstract class MenuControle {
             return true;
         }
         else if(usuarioAtual.getColab_flag()){
-            //menuColab.setVisible(true);
+            menuColab.setVisible(true);
             return true;
         }
         else{

@@ -151,7 +151,7 @@ public class JColaborador extends javax.swing.JFrame {
     }
     
     public void criarPalestra(){
-        MenuControle.menuColabCriarPalestra.setVisible(true);
+        JColabCriarPalestra.geraCriarPalestra().setVisible(true);
         dispose();
     }
     
