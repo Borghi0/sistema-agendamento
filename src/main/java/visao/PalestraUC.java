@@ -6,14 +6,12 @@ package main.java.visao;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import main.java.controle.PalestraControle;
 import main.java.controle.PalestranteControle;
 import main.java.exceptions.PalestraConcomitanteException;
 import main.java.objetos.Palestra;
 import main.java.objetos.Palestrante;
-
 /**
  *
  * @author arthu
@@ -25,33 +23,32 @@ public class PalestraUC extends javax.swing.JFrame {
     
     public PalestraUC() {
         initComponents();
-        DefaultComboBoxModel modelo = (DefaultComboBoxModel) cmbPalestrante.getModel();
-        modelo.removeAllElements();
+        Palestrante pll = new Palestrante();
+        
+        cmbPal.removeAllItems();
         
         for(Palestrante p : pc.getPalestrantes())
-            modelo.addElement(p.getNome());
+            cmbPal.addItem(p.getNome());
     }
     
     public PalestraUC(int flag) {
         initComponents();
-        DefaultComboBoxModel modelo = (DefaultComboBoxModel) cmbPalestrante.getModel();
-        modelo.removeAllElements();
+        
+        cmbPal.removeAllItems();
         
         for(Palestrante p : pc.getPalestrantes())
-            modelo.addElement(p.getNome());
+            cmbPal.addItem(p.getNome());
         
         this.flag = flag;
     }
     
     public PalestraUC(Palestra palestrinha, int flag) {
         initComponents();
-        DefaultComboBoxModel modelo = (DefaultComboBoxModel) cmbPalestrante.getModel();
-        modelo.removeAllElements();
+       
+        cmbPal.removeAllItems();
         
-        modelo.addElement(null);
-        
-        for(Palestrante p1 : pc.getPalestrantes())
-            modelo.addElement(p1);
+        for(Palestrante p : pc.getPalestrantes())
+            cmbPal.addItem(p.getNome());
         
         cxTitulo.setText(palestrinha.getTitulo());
         cxDia.setText(Integer.toString(palestrinha.getData().getDayOfMonth()));
@@ -60,8 +57,8 @@ public class PalestraUC extends javax.swing.JFrame {
         cxHora.setText(Integer.toString(palestrinha.getHora().getHour()));
         cxMin.setText(Integer.toString(palestrinha.getHora().getMinute()));
         cxVaga.setText(Integer.toString(palestrinha.getVagas()));
-        cmbPalestrante.setSelectedItem(palestrinha.getPalestrantes());
         cxLocal.setText(palestrinha.getLocal());
+        cmbPal.setSelectedItem(palestrinha.getPalestrantes().getNome());
         
         this.flag = flag;
         this.palestrinha = palestrinha;
@@ -85,8 +82,6 @@ public class PalestraUC extends javax.swing.JFrame {
         cxAno = new javax.swing.JTextField();
         rtHora = new javax.swing.JLabel();
         rtVaga = new javax.swing.JLabel();
-        rtPalestrante = new javax.swing.JLabel();
-        cmbPalestrante = new javax.swing.JComboBox<>();
         cxVaga = new javax.swing.JTextField();
         cxHora = new javax.swing.JTextField();
         rtSepHora = new javax.swing.JLabel();
@@ -94,8 +89,10 @@ public class PalestraUC extends javax.swing.JFrame {
         rtLocal = new javax.swing.JLabel();
         cxLocal = new javax.swing.JTextField();
         btOk5 = new javax.swing.JButton();
+        rtPalestrante = new javax.swing.JLabel();
+        cmbPal = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         rtTitulo.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         rtTitulo.setText("Titulo: ");
@@ -115,11 +112,6 @@ public class PalestraUC extends javax.swing.JFrame {
         rtVaga.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         rtVaga.setText("Vagas: ");
 
-        rtPalestrante.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        rtPalestrante.setText("Palestrante: ");
-
-        cmbPalestrante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         rtSepHora.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         rtSepHora.setText("h");
 
@@ -134,33 +126,22 @@ public class PalestraUC extends javax.swing.JFrame {
             }
         });
 
+        rtPalestrante.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        rtPalestrante.setText("Palestrante: ");
+
+        cmbPal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(rtPalestrante)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cxTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rtData)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cxDia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rtSep1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cxMes, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rtSep2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cxAno, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rtPalestrante, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbPalestrante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbPal, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btOk5))
                     .addGroup(layout.createSequentialGroup()
@@ -178,8 +159,27 @@ public class PalestraUC extends javax.swing.JFrame {
                                 .addComponent(rtSepHora)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cxMin, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cxLocal))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                            .addComponent(cxLocal)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cxTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rtData)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cxDia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rtSep1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cxMes, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rtSep2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cxAno, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,12 +212,13 @@ public class PalestraUC extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rtLocal)
                     .addComponent(cxLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rtPalestrante)
-                    .addComponent(cmbPalestrante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btOk5))
-                .addGap(17, 17, 17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btOk5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rtPalestrante)
+                        .addComponent(cmbPal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
         );
 
         pack();
@@ -234,7 +235,6 @@ public class PalestraUC extends javax.swing.JFrame {
     }
     
     private void atualizar(){
-        Palestrante pp = null;
         Palestra aux = new Palestra();
 
         aux.setTitulo(cxTitulo.getText());
@@ -255,12 +255,6 @@ public class PalestraUC extends javax.swing.JFrame {
 
             aux.setLocal(cxLocal.getText());
 
-            for(Palestrante pal : pc.getPalestrantes())
-                if(pal.equals(cmbPalestrante.getSelectedItem()))
-                    pp = pal;
-
-            aux.setPalestrante(pp);
-            
             Palestra teste = PalestraControle.atualizar(palestrinha.getCodigo(), aux);
 
             if(teste == null)
@@ -276,11 +270,40 @@ public class PalestraUC extends javax.swing.JFrame {
     }
     
     private void cadastrar(){
+        Palestra aux = new Palestra();
+        Palestrante pp = null;
+        
+        aux.setTitulo(cxTitulo.getText());
         try{
-            PalestraControle.cadastrar(palestrinha);
+            aux.setData(LocalDate.of(
+                Integer.parseInt(cxAno.getText()),
+                Integer.parseInt(cxMes.getText()),
+                Integer.parseInt(cxDia.getText())
+            ));
+
+            aux.setHora(LocalTime.of(
+                Integer.parseInt(cxHora.getText()),
+                Integer.parseInt(cxMin.getText())
+            ));
+
+            aux.setVagas(Integer.parseInt(cxVaga.getText()));
+            
+            for(Palestrante p1 : pc.getPalestrantes())
+                if(p1.getNome().equals((String) cmbPal.getSelectedItem())) pp = p1;
+            
+            aux.setPalestrante(pp);
+            aux.setLocal(cxLocal.getText());
+            
+            if(pp != null) aux.setPalestrante(pp);
+            
+            PalestraControle.cadastrar(aux);
         } catch(PalestraConcomitanteException pce){
             JOptionPane.showMessageDialog(null, 
                     "Nao pode haver duas palestras simultaneas no mesmo local",
+                    "Erro de cadastro", JOptionPane.ERROR_MESSAGE);
+        } catch(NumberFormatException nfe){
+            JOptionPane.showMessageDialog(null, 
+                    "Parametros invalidos",
                     "Erro de cadastro", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -318,13 +341,8 @@ public class PalestraUC extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btOk;
-    private javax.swing.JButton btOk1;
-    private javax.swing.JButton btOk2;
-    private javax.swing.JButton btOk3;
-    private javax.swing.JButton btOk4;
     private javax.swing.JButton btOk5;
-    private javax.swing.JComboBox<String> cmbPalestrante;
+    private javax.swing.JComboBox<String> cmbPal;
     private javax.swing.JTextField cxAno;
     private javax.swing.JTextField cxDia;
     private javax.swing.JTextField cxHora;

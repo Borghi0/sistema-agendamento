@@ -73,6 +73,11 @@ public final class JAdminPll extends javax.swing.JFrame implements JAdminInterfa
                 "Nome", "CPF", "Formacao"
             }
         ));
+        tbPll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbPllMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbPll);
 
         btPllR.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
@@ -216,6 +221,10 @@ public final class JAdminPll extends javax.swing.JFrame implements JAdminInterfa
         cadastrar();
         compTabela();
     }//GEN-LAST:event_btPllCActionPerformed
+
+    private void tbPllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPllMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbPllMouseClicked
     
     @Override
     public void compTabela(){

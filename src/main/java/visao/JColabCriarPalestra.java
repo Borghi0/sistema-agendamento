@@ -270,10 +270,17 @@ public class JColabCriarPalestra extends javax.swing.JFrame {
                 mostraErro("Data ou Hora fora de padrão!");
             }
             catch(PalestraConcomitanteException pce){
-                mostraErro("Local está reservado! Coloque outro local ou horário");
-            }
-            catch(NumberFormatException nfe){
-                mostraErro("Vagas deve ser um numero inteiro");
+                JOptionPane.showMessageDialog(
+                        null, 
+                        "Local e Horario ja reservados", 
+                        "ERRO DE CADASTRO", 
+                        JOptionPane.ERROR_MESSAGE);
+            } catch(NumberFormatException nfe){
+                JOptionPane.showMessageDialog(
+                        null, 
+                        "Vagas apresenta erro", 
+                        "ERRO DE CADASTRO", 
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
         
