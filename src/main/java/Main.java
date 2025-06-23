@@ -11,16 +11,16 @@ import java.time.LocalDate;
 
 public class Main{
     
-    public static void main(String args[]){
-        
+    public static void main(String args[]){        
         UsuarioControle.getUsuarios().add(new Usuario("administrador", "0", "admin@", "adminSenha", "admin", true, false));
+
         
         // <editor-fold defaultstate="collapsed" desc="Cadastros para testes">
         
             UsuarioControle.getUsuarios().add(new Usuario("testeeeeeeeeeeeeeeeeeeeeeeeeeeee32131", "0", "amigo@", "amigos", "amigo", false, false));
 
-            Palestrante p1 = new Palestrante("Ana Silva", "111.111.111-11", "Engenharia da Computação");
-            try{Palestrante p2 = new Palestrante("Carlos Souza", "222.222.222-22", "Ciência da Computação");
+            try{Palestrante p1 = new Palestrante("Ana Silva", "111.111.111-11", "Engenharia da Computação");
+            Palestrante p2 = new Palestrante("Carlos Souza", "222.222.222-22", "Ciência da Computação");
             Palestrante p3 = new Palestrante("Mariana Lima", "333.333.333-33", "Segurança da Informação");
             Palestrante p4 = new Palestrante("João Mendes", "444.444.444-44", "Sistemas de Informação");
             Palestrante p5 = new Palestrante("Fernanda Rocha", "555.555.555-55", "Inteligência Artificial");
