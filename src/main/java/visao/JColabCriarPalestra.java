@@ -219,7 +219,11 @@ public class JColabCriarPalestra extends javax.swing.JFrame {
     }//GEN-LAST:event_btVoltarActionPerformed
 
     private void btCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCriarActionPerformed
-        criarPalestra();
+        if(verificaCaixasTexto()){
+            criarPalestra();
+        }else{
+            mostraErro("Caixa de Texto Vazia!");
+        }
     }//GEN-LAST:event_btCriarActionPerformed
 
     private void cxVagasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxVagasActionPerformed
@@ -250,10 +254,9 @@ public class JColabCriarPalestra extends javax.swing.JFrame {
             palestrante.setNome(cxPalestrante.getText());
             palestrante.setFormacao(cxPalTitulo.getText());
             palestrante.setCpf(cxPalCpf.getText());
-            int vagas = Integer.parseInt(cxVagas.getText());
-            
             
             try{
+                int vagas = Integer.parseInt(cxVagas.getText());
                 bdPalestra.cadastrar(
                         cxTitulo.getText(),
                         cxLocal.getText(),
@@ -261,26 +264,41 @@ public class JColabCriarPalestra extends javax.swing.JFrame {
                         LocalTime.parse(cxHora.getText(),formataTime),
                         vagas,
                         palestrante);
+                limpar();
             }
             catch(DateTimeParseException dtpe){
-                JOptionPane.showMessageDialog(
-                        null, 
-                        "Data ou Horario apresentam erro", 
-                        "ERRO DE CADASTRO", 
-                        JOptionPane.ERROR_MESSAGE);
+                mostraErro("Data ou Hora fora de padrão!");
             }
             catch(PalestraConcomitanteException pce){
-                JOptionPane.showMessageDialog(
-                        null, 
-                        "Local e Horario ja reservados", 
-                        "ERRO DE CADASTRO", 
-                        JOptionPane.ERROR_MESSAGE);
+                mostraErro("Local está reservado! Coloque outro local ou horário");
             }
-            
+            catch(NumberFormatException nfe){
+                mostraErro("Vagas deve ser um numero inteiro");
+            }
         }
-        limpar();
+        
     }
     
+    public void mostraErro(String msg){
+        JOptionPane.showMessageDialog(
+                        null, 
+                        msg, 
+                        "ERRO", 
+                        JOptionPane.ERROR_MESSAGE);
+    }
+    
+    private boolean verificaCaixasTexto(){
+        if("".equals(cxTitulo.getText())) return false;
+        if("".equals(cxLocal.getText())) return false;
+        if("".equals(cxData.getText())) return false;
+        if("".equals(cxHora.getText())) return false;
+        if("".equals(cxPalestrante.getText())) return false;
+        if("".equals(cxPalCpf.getText())) return false;
+        if("".equals(cxPalTitulo.getText())) return false;
+        if("".equals(cxVagas.getText())) return false;
+        
+        return true;
+    }
     public void limpar(){
         cxTitulo.setText("");
         cxLocal.setText("");
